@@ -1,0 +1,203 @@
+# Mihomo merge fragment. This is not a complete subscription.
+# Merge these root-level sections into an existing configuration.
+
+rule-providers:
+  openai_login_custom:
+    type: http
+    behavior: classical
+    format: yaml
+    url: https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/main/rules/openai_login_custom.yaml
+    path: ./ruleset/openai_login_custom.yaml
+    interval: 86400
+
+  douyin_direct_custom:
+    type: http
+    behavior: classical
+    format: yaml
+    url: https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/main/rules/douyin_direct_custom.yaml
+    path: ./ruleset/douyin_direct_custom.yaml
+    interval: 86400
+
+  tencent_docs_direct_custom:
+    type: http
+    behavior: classical
+    format: yaml
+    url: https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/main/rules/tencent_docs_direct_custom.yaml
+    path: ./ruleset/tencent_docs_direct_custom.yaml
+    interval: 86400
+
+  google_drive_custom:
+    type: http
+    behavior: classical
+    format: yaml
+    url: https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/main/rules/google_drive_custom.yaml
+    path: ./ruleset/google_drive_custom.yaml
+    interval: 86400
+
+  ai_api_direct_custom:
+    type: http
+    behavior: classical
+    format: yaml
+    url: https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/main/rules/ai_api_direct_custom.yaml
+    path: ./ruleset/ai_api_direct_custom.yaml
+    interval: 86400
+
+  ai_api_custom:
+    type: http
+    behavior: classical
+    format: yaml
+    url: https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/main/rules/ai_api_custom.yaml
+    path: ./ruleset/ai_api_custom.yaml
+    interval: 86400
+
+  ai_custom:
+    type: http
+    behavior: classical
+    format: yaml
+    url: https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/main/rules/ai_custom.yaml
+    path: ./ruleset/ai_custom.yaml
+    interval: 86400
+
+  github_custom:
+    type: http
+    behavior: classical
+    format: yaml
+    url: https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/main/rules/github_custom.yaml
+    path: ./ruleset/github_custom.yaml
+    interval: 86400
+
+  tiktok_custom:
+    type: http
+    behavior: classical
+    format: yaml
+    url: https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/main/rules/tiktok_custom.yaml
+    path: ./ruleset/tiktok_custom.yaml
+    interval: 86400
+
+  crypto_custom:
+    type: http
+    behavior: classical
+    format: yaml
+    url: https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/main/rules/crypto_custom.yaml
+    path: ./ruleset/crypto_custom.yaml
+    interval: 86400
+
+  payment_custom:
+    type: http
+    behavior: classical
+    format: yaml
+    url: https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/main/rules/payment_custom.yaml
+    path: ./ruleset/payment_custom.yaml
+    interval: 86400
+
+  streaming_custom:
+    type: http
+    behavior: classical
+    format: yaml
+    url: https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/main/rules/streaming_custom.yaml
+    path: ./ruleset/streaming_custom.yaml
+    interval: 86400
+
+  microsoft_store_custom:
+    type: http
+    behavior: classical
+    format: yaml
+    url: https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/main/rules/microsoft_store_custom.yaml
+    path: ./ruleset/microsoft_store_custom.yaml
+    interval: 86400
+
+  microsoft_update_custom:
+    type: http
+    behavior: classical
+    format: yaml
+    url: https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/main/rules/microsoft_update_custom.yaml
+    path: ./ruleset/microsoft_update_custom.yaml
+    interval: 86400
+
+  microsoft_connectivity_custom:
+    type: http
+    behavior: classical
+    format: yaml
+    url: https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/main/rules/microsoft_connectivity_custom.yaml
+    path: ./ruleset/microsoft_connectivity_custom.yaml
+    interval: 86400
+
+  microsoft_custom:
+    type: http
+    behavior: classical
+    format: yaml
+    url: https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/main/rules/microsoft_custom.yaml
+    path: ./ruleset/microsoft_custom.yaml
+    interval: 86400
+
+  adobe_download_direct_custom:
+    type: http
+    behavior: classical
+    format: yaml
+    url: https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/main/rules/adobe_download_direct_custom.yaml
+    path: ./ruleset/adobe_download_direct_custom.yaml
+    interval: 86400
+
+  adobe_custom:
+    type: http
+    behavior: classical
+    format: yaml
+    url: https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/main/rules/adobe_custom.yaml
+    path: ./ruleset/adobe_custom.yaml
+    interval: 86400
+
+  mobile_cn_custom:
+    type: http
+    behavior: classical
+    format: yaml
+    url: https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/main/rules/mobile_cn_custom.yaml
+    path: ./ruleset/mobile_cn_custom.yaml
+    interval: 86400
+
+  mobile_cn_game_custom:
+    type: http
+    behavior: classical
+    format: yaml
+    url: https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/main/rules/mobile_cn_game_custom.yaml
+    path: ./ruleset/mobile_cn_game_custom.yaml
+    interval: 86400
+
+  mobile_overseas_custom:
+    type: http
+    behavior: classical
+    format: yaml
+    url: https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/main/rules/mobile_overseas_custom.yaml
+    path: ./ruleset/mobile_overseas_custom.yaml
+    interval: 86400
+
+  youtube_custom:
+    type: http
+    behavior: classical
+    format: yaml
+    url: https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/main/rules/youtube_custom.yaml
+    path: ./ruleset/youtube_custom.yaml
+    interval: 86400
+
+rules:
+  - RULE-SET,openai_login_custom,AI
+  - RULE-SET,douyin_direct_custom,DIRECT
+  - RULE-SET,tencent_docs_direct_custom,DIRECT
+  - RULE-SET,google_drive_custom,AI
+  - RULE-SET,ai_api_direct_custom,DIRECT
+  - RULE-SET,ai_api_custom,AI
+  - RULE-SET,ai_custom,AI
+  - RULE-SET,github_custom,GitHub
+  - RULE-SET,tiktok_custom,TikTok
+  - RULE-SET,crypto_custom,Crypto
+  - RULE-SET,payment_custom,Payment
+  - RULE-SET,streaming_custom,Streaming
+  - RULE-SET,microsoft_store_custom,Microsoft
+  - RULE-SET,microsoft_update_custom,Microsoft
+  - RULE-SET,microsoft_connectivity_custom,DIRECT
+  - RULE-SET,microsoft_custom,Microsoft
+  - RULE-SET,adobe_download_direct_custom,DIRECT
+  - RULE-SET,adobe_custom,Adobe
+  - RULE-SET,mobile_cn_custom,DIRECT
+  - RULE-SET,mobile_cn_game_custom,DIRECT
+  - RULE-SET,mobile_overseas_custom,OtherProxy
+  - RULE-SET,youtube_custom,Streaming

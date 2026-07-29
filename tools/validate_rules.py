@@ -10,6 +10,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 RULES_DIR = ROOT / "rules"
 MANIFEST_PATH = ROOT / "manifest.json"
+ALL_IN_ONE_PATH = ROOT / "examples" / "all-in-one.yaml"
 ALLOWED_KINDS = {"DOMAIN", "DOMAIN-SUFFIX", "DOMAIN-KEYWORD", "PROCESS-NAME"}
 FORBIDDEN_FILES = {"airport_site_custom.yaml", "recmata_service_direct_custom.yaml"}
 SENSITIVE_PATTERNS = {
@@ -106,6 +107,21 @@ def main() -> int:
         errors.append("manifest total_rules mismatch")
     if manifest.get("public_categories") != len(actual_files):
         errors.append("manifest public_categories mismatch")
+
+    try:
+        all_in_one = ALL_IN_ONE_PATH.read_text(encoding="utf-8")
+    except (OSError, UnicodeError) as exc:
+        errors.append(f"all-in-one example error: {exc}")
+        all_in_one = ""
+    for filename in sorted(actual_files):
+        name = Path(filename).stem
+        if f"  {name}:" not in all_in_one:
+            errors.append(f"all-in-one example missing provider: {name}")
+        if f"  - RULE-SET,{name}," not in all_in_one:
+            errors.append(f"all-in-one example missing rule: {name}")
+    for forbidden_name in FORBIDDEN_FILES:
+        if Path(forbidden_name).stem in all_in_one:
+            errors.append(f"all-in-one example contains private provider: {forbidden_name}")
 
     if errors:
         for error in errors:

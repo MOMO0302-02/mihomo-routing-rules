@@ -17,6 +17,7 @@
 
 - 公开规则版本：`v2026.07.28.1GoogleAITK`。
 - 规则文件、条目数和 SHA-256 以 `manifest.json` 为准。
+- 使用方式以 `README.md` 与 `examples/all-in-one.yaml` 为准；示例是合并片段，不是完整订阅。
 - GitHub 仓库：`MOMO0302-02/mihomo-routing-rules`。
 
 ## 怎么验证
