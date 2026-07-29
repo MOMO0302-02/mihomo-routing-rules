@@ -2,7 +2,6 @@ payload:
   - "DOMAIN-SUFFIX,binance.com"
   - "DOMAIN-SUFFIX,binance.us"
   - "DOMAIN-SUFFIX,okx.com"
-  - "DOMAIN,www.bybit.com"
   - "DOMAIN-SUFFIX,bybit.com"
   - "DOMAIN-SUFFIX,bybitglobal.com"
   - "DOMAIN-SUFFIX,bybdc6.com"

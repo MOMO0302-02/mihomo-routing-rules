@@ -2,11 +2,34 @@
 
 一组面向 Mihomo/Clash Meta 的公开分流规则，重点覆盖 AI 服务、GitHub、TikTok、支付、流媒体、Microsoft、Adobe 和常用移动应用。
 
+[![Validate rules](https://github.com/MOMO0302-02/mihomo-routing-rules/actions/workflows/validate.yml/badge.svg)](https://github.com/MOMO0302-02/mihomo-routing-rules/actions/workflows/validate.yml)
+[![Latest release](https://img.shields.io/github/v/release/MOMO0302-02/mihomo-routing-rules)](https://github.com/MOMO0302-02/mihomo-routing-rules/releases/latest)
+
 ## 先说明
 
 本仓库提供的是**规则片段**，不是完整订阅。它不包含代理节点、DNS、端口或策略组，不能直接替代你的订阅配置。
 
-使用时需要把 `rule-providers` 和 `rules` 合并进现有 Mihomo 配置，或者放进 Clash Party、FlClash 等客户端的覆写/扩展配置中。
+使用时需要把 `rule-providers` 和 `rules` 合并进现有 Mihomo 配置，或者放进 Clash Party、FlClash 等客户端的覆写/扩展配置中。22 个分类的用途、条目数和独立下载地址见 [`RULES.md`](RULES.md)。
+
+## 稳定更新通道
+
+- `main`：文档、示例、验证器和下一版规则的开发分支。
+- `release`：通过验证后才更新的稳定消费分支，配置文件应固定引用它。
+- [GitHub Releases](https://github.com/MOMO0302-02/mihomo-routing-rules/releases)：按规则版本保存可下载归档和 manifest。
+
+规则地址优先使用 GitHub Raw：
+
+```text
+https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/release/rules/<分类名>.yaml
+```
+
+网络环境无法稳定访问 Raw 时，可改用 jsDelivr：
+
+```text
+https://cdn.jsdelivr.net/gh/MOMO0302-02/mihomo-routing-rules@release/rules/<分类名>.yaml
+```
+
+jsDelivr 可能存在缓存延迟，不保证与 `release` 分支瞬时同步；需要立即获得最新版时优先使用 Raw 或 GitHub Release。
 
 ## 最快用法：添加一个分类
 
@@ -22,7 +45,7 @@ rule-providers:
     type: http
     behavior: classical
     format: yaml
-    url: https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/main/rules/ai_custom.yaml
+    url: https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/release/rules/ai_custom.yaml
     path: ./ruleset/ai_custom.yaml
     interval: 86400
 ```
@@ -67,6 +90,17 @@ mihomo -t -f config.yaml
 
 不要把 `all-in-one.yaml` 当作完整订阅直接导入；它没有代理节点和完整运行参数。
 
+## 和原有规则怎么排序
+
+这 22 类是高优先级的服务专项规则，不负责替代你原配置的 LAN、广告、国内/国外大类或最终兜底策略。推荐顺序：
+
+1. 本地网络、私有地址和必须优先的安全规则；
+2. 本仓库的专项 `RULE-SET`；
+3. 原配置的其他服务、`GEOSITE`、`GEOIP`；
+4. 最后的 `MATCH`。
+
+你原配置采用“默认直连”还是“默认代理”，仍由最后的兜底规则决定；接入本仓库不应擅自改变 `MATCH`。`openai_login_custom` 是 `ai_custom` 的专项子集，必须排在它前面。
+
 ## 示例策略名怎么对应
 
 | 示例策略 | 对应分类 | 建议 |
@@ -97,19 +131,19 @@ mihomo -t -f config.yaml
 
 ## 只用某个规则文件
 
-所有分类都在 [`rules/`](rules/) 下。远程地址格式为：
+所有分类都在 [`rules/`](rules/) 下；完整索引见 [`RULES.md`](RULES.md)。稳定远程地址格式为：
 
 ```text
-https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/main/rules/<分类名>.yaml
+https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/release/rules/<分类名>.yaml
 ```
 
 例如：
 
 ```text
-https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/main/rules/tiktok_custom.yaml
+https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/release/rules/tiktok_custom.yaml
 ```
 
-全部分类、条目数和 SHA-256 见 [`manifest.json`](manifest.json)。
+全部分类、建议策略、条目数、Raw 与 CDN 地址见 [`RULES.md`](RULES.md)，精确 SHA-256 见 [`manifest.json`](manifest.json)。
 
 ## 更新方式
 
@@ -129,8 +163,15 @@ python tools/validate_rules.py
 
 - `rules/`：可由 Mihomo 直接加载的 classical rule-provider。
 - `examples/`：单独片段与全量合并示例。
+- `RULES.md`：全部分类、建议策略和下载地址索引。
 - `manifest.json`：版本、条目数和文件哈希。
 - `tools/validate_rules.py`：无第三方依赖的本地验证器。
+
+## 维护与来源
+
+- 贡献或修正规则前先读 [`CONTRIBUTING.md`](CONTRIBUTING.md)。
+- 版本变化见 [`CHANGELOG.md`](CHANGELOG.md)。
+- 仓库的发布结构参考了 [Loyalsoldier/clash-rules](https://github.com/Loyalsoldier/clash-rules) 的稳定分支、逐文件地址和发布归档做法；没有复制其规则数据或代码。
 
 ## 隐私边界
 

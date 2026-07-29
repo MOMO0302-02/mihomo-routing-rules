@@ -11,8 +11,27 @@ ROOT = Path(__file__).resolve().parents[1]
 RULES_DIR = ROOT / "rules"
 MANIFEST_PATH = ROOT / "manifest.json"
 ALL_IN_ONE_PATH = ROOT / "examples" / "all-in-one.yaml"
+PROVIDERS_PATH = ROOT / "examples" / "rule-providers.yaml"
+RULE_ORDER_PATH = ROOT / "examples" / "rules.yaml"
+RULE_INDEX_PATH = ROOT / "RULES.md"
+README_PATH = ROOT / "README.md"
+RAW_PREFIX = (
+    "https://raw.githubusercontent.com/MOMO0302-02/"
+    "mihomo-routing-rules/release/rules/"
+)
+CDN_PREFIX = (
+    "https://cdn.jsdelivr.net/gh/MOMO0302-02/"
+    "mihomo-routing-rules@release/rules/"
+)
+DEVELOPMENT_RULE_URL = (
+    "https://raw.githubusercontent.com/MOMO0302-02/"
+    "mihomo-routing-rules/main/rules/"
+)
 ALLOWED_KINDS = {"DOMAIN", "DOMAIN-SUFFIX", "DOMAIN-KEYWORD", "PROCESS-NAME"}
 FORBIDDEN_FILES = {"airport_site_custom.yaml", "recmata_service_direct_custom.yaml"}
+ALLOWED_OVERLAP_GROUPS = {
+    frozenset({"ai_custom", "openai_login_custom"}),
+}
 SENSITIVE_PATTERNS = {
     "proxy URI": re.compile(r"(?i)\b(?:vless|vmess|trojan|ss|hysteria2?)://"),
     "UUID": re.compile(
@@ -55,6 +74,26 @@ def read_payload(path: Path) -> list[str]:
         raise ValueError(f"{path.name}: payload is empty")
     if len(payload) != len(set(payload)):
         raise ValueError(f"{path.name}: duplicate rules detected")
+    suffix_targets = {
+        rule.partition(",")[2]
+        for rule in payload
+        if rule.startswith("DOMAIN-SUFFIX,")
+    }
+    redundant_domains = [
+        rule
+        for rule in payload
+        if rule.startswith("DOMAIN,")
+        and any(
+            rule.partition(",")[2] == suffix
+            or rule.partition(",")[2].endswith(f".{suffix}")
+            for suffix in suffix_targets
+        )
+    ]
+    if redundant_domains:
+        raise ValueError(
+            f"{path.name}: DOMAIN rules are already covered by broader "
+            f"DOMAIN-SUFFIX rules: {redundant_domains}"
+        )
     return payload
 
 
@@ -68,6 +107,13 @@ def main() -> int:
 
     if manifest.get("schema") != 1:
         errors.append("manifest schema must be 1")
+    privacy = manifest.get("privacy")
+    if not isinstance(privacy, dict) or any(privacy.get(key) is not False for key in (
+        "contains_proxy_nodes",
+        "contains_subscription_urls",
+        "contains_credentials",
+    )):
+        errors.append("manifest privacy flags must explicitly be false")
     files = manifest.get("files")
     if not isinstance(files, dict) or not files:
         errors.append("manifest files must be a non-empty object")
@@ -85,6 +131,7 @@ def main() -> int:
         errors.append(f"private rule files are forbidden: {sorted(forbidden)}")
 
     total = 0
+    rule_owners: dict[str, set[str]] = {}
     for filename in sorted(actual_files):
         path = RULES_DIR / filename
         try:
@@ -93,6 +140,8 @@ def main() -> int:
             errors.append(str(exc))
             continue
         total += len(payload)
+        for rule in payload:
+            rule_owners.setdefault(rule, set()).add(path.stem)
         entry = files.get(filename) or {}
         if entry.get("count") != len(payload):
             errors.append(f"{filename}: manifest count mismatch")
@@ -107,21 +156,71 @@ def main() -> int:
         errors.append("manifest total_rules mismatch")
     if manifest.get("public_categories") != len(actual_files):
         errors.append("manifest public_categories mismatch")
+    for rule, owners in sorted(rule_owners.items()):
+        if len(owners) > 1 and frozenset(owners) not in ALLOWED_OVERLAP_GROUPS:
+            errors.append(
+                f"unexpected cross-category duplicate: {rule} in {sorted(owners)}"
+            )
 
-    try:
-        all_in_one = ALL_IN_ONE_PATH.read_text(encoding="utf-8")
-    except (OSError, UnicodeError) as exc:
-        errors.append(f"all-in-one example error: {exc}")
-        all_in_one = ""
+    public_documents: dict[Path, str] = {}
+    for path in (
+        ALL_IN_ONE_PATH,
+        PROVIDERS_PATH,
+        RULE_ORDER_PATH,
+        RULE_INDEX_PATH,
+        README_PATH,
+    ):
+        try:
+            public_documents[path] = path.read_text(encoding="utf-8")
+        except (OSError, UnicodeError) as exc:
+            errors.append(f"{path.relative_to(ROOT)} read error: {exc}")
+            public_documents[path] = ""
+
+    all_in_one = public_documents[ALL_IN_ONE_PATH]
+    providers = public_documents[PROVIDERS_PATH]
+    rule_order = public_documents[RULE_ORDER_PATH]
+    rule_index = public_documents[RULE_INDEX_PATH]
+    readme = public_documents[README_PATH]
+
+    for path, text in public_documents.items():
+        if DEVELOPMENT_RULE_URL in text:
+            errors.append(
+                f"{path.relative_to(ROOT)} references the development branch instead of release"
+            )
+
     for filename in sorted(actual_files):
         name = Path(filename).stem
+        entry = files.get(filename) or {}
+        stable_url = f"{RAW_PREFIX}{filename}"
+        cdn_url = f"{CDN_PREFIX}{filename}"
         if f"  {name}:" not in all_in_one:
             errors.append(f"all-in-one example missing provider: {name}")
         if f"  - RULE-SET,{name}," not in all_in_one:
             errors.append(f"all-in-one example missing rule: {name}")
+        if stable_url not in all_in_one:
+            errors.append(f"all-in-one example missing stable URL: {name}")
+        if f"{name}:" not in providers or stable_url not in providers:
+            errors.append(f"provider example missing stable provider: {name}")
+        if f"  - RULE-SET,{name}," not in rule_order:
+            errors.append(f"rule-order example missing rule: {name}")
+        if f"`{name}` | {entry.get('count')} |" not in rule_index:
+            errors.append(f"rule index missing provider/count: {name}")
+        if stable_url not in rule_index:
+            errors.append(f"rule index missing Raw URL: {name}")
+        if cdn_url not in rule_index:
+            errors.append(f"rule index missing CDN URL: {name}")
     for forbidden_name in FORBIDDEN_FILES:
-        if Path(forbidden_name).stem in all_in_one:
-            errors.append(f"all-in-one example contains private provider: {forbidden_name}")
+        forbidden_stem = Path(forbidden_name).stem
+        for path, text in public_documents.items():
+            if forbidden_stem in text and path not in {README_PATH}:
+                errors.append(
+                    f"{path.relative_to(ROOT)} contains private provider: {forbidden_name}"
+                )
+
+    if "`main`" not in readme or "`release`" not in readme:
+        errors.append("README must explain main and release branch roles")
+    if RAW_PREFIX not in readme or CDN_PREFIX not in readme:
+        errors.append("README must document Raw and CDN stable URL formats")
 
     if errors:
         for error in errors:

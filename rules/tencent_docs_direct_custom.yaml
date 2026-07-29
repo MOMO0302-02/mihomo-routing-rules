@@ -1,7 +1,5 @@
 payload:
-  - "DOMAIN,checkout.offapi.net"
   - "DOMAIN-SUFFIX,offapi.net"
-  - "DOMAIN,docs.qq.com"
   - "DOMAIN-SUFFIX,docs.qq.com"
   - "DOMAIN-SUFFIX,docs.gtimg.com"
   - "DOMAIN-SUFFIX,gtimg.com"

@@ -1,6 +1,4 @@
 payload:
-  - "DOMAIN,ccmdl.adobe.com"
-  - "DOMAIN,ccmdls.adobe.com"
   - "DOMAIN-SUFFIX,ccmdl.adobe.com"
   - "DOMAIN-SUFFIX,ccmdls.adobe.com"
   - "DOMAIN-SUFFIX,swupdl.adobe.com"

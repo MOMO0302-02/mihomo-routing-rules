@@ -15,9 +15,10 @@
 
 ## 当前状态
 
-- 公开规则版本：`v2026.07.28.1GoogleAITK`。
+- 公开规则版本：`v2026.07.28.2GoogleAITK`（22 类、710 条；已无损去除 102 条被同组后缀规则完全覆盖的精确域名冗余）。
 - 规则文件、条目数和 SHA-256 以 `manifest.json` 为准。
-- 使用方式以 `README.md` 与 `examples/all-in-one.yaml` 为准；示例是合并片段，不是完整订阅。
+- 使用方式以 `README.md`、`RULES.md` 与 `examples/all-in-one.yaml` 为准；示例是合并片段，不是完整订阅。
+- `main` 是开发与文档分支，`release` 是通过验证后的稳定消费分支；公开配置地址只引用 `release`。
 - GitHub 仓库：`MOMO0302-02/mihomo-routing-rules`。
 
 ## 怎么验证
