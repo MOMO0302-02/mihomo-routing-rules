@@ -1,0 +1,102 @@
+{
+  "schema": 1,
+  "rule_version": "v2026.07.28.1GoogleAITK",
+  "generated_on": "2026-07-28",
+  "public_categories": 22,
+  "total_rules": 812,
+  "privacy": {
+    "contains_proxy_nodes": false,
+    "contains_subscription_urls": false,
+    "contains_credentials": false
+  },
+  "files": {
+    "openai_login_custom.yaml": {
+      "count": 30,
+      "sha256": "ae79892ed34a55152abb5613d730206fe49ea75630bb1b19d47e26dc406f7bfe"
+    },
+    "douyin_direct_custom.yaml": {
+      "count": 36,
+      "sha256": "3bc050931828a98c656be9d51fe49f69615edeaae56232d18fc57c432afde876"
+    },
+    "tencent_docs_direct_custom.yaml": {
+      "count": 19,
+      "sha256": "e55faeec953bf7b242e60f8349f8bc9644405dea9ebffbc80c18c6f1eacc9143"
+    },
+    "google_drive_custom.yaml": {
+      "count": 56,
+      "sha256": "6e7f738683fa5d22de257e38a9d8cdbd4613d9a628e587c04421234d54d30dc3"
+    },
+    "ai_api_direct_custom.yaml": {
+      "count": 50,
+      "sha256": "dd1ea05c9435cb30ddf7b2546ab8e73e6475dda057b4c3786eaeb93ab4ea45db"
+    },
+    "ai_api_custom.yaml": {
+      "count": 77,
+      "sha256": "66bb2255694995f83a46dad993961d5f33a8d62297e95584411b3d68fb63370e"
+    },
+    "ai_custom.yaml": {
+      "count": 120,
+      "sha256": "87c97b86904d17966f79a59fe17e118cbf2ea714dce1cc48dab777045b72b5d5"
+    },
+    "github_custom.yaml": {
+      "count": 12,
+      "sha256": "0a1488bc5da1b5f1670ea41742d5b9ecb3e05e3d6cc9b2c6075548bd2927eb57"
+    },
+    "tiktok_custom.yaml": {
+      "count": 46,
+      "sha256": "eb8934327a19154da6a24559d513728741f7c697514d5cd5f66116346cc0e878"
+    },
+    "crypto_custom.yaml": {
+      "count": 39,
+      "sha256": "fdd8755844a5f8196975cd1545907f366220afea169e4cefb1edf5c9f347e874"
+    },
+    "payment_custom.yaml": {
+      "count": 21,
+      "sha256": "c1ac5b8730ce8f588b58501e773c4289b7c4fdddba43fff8d199a34246546f71"
+    },
+    "streaming_custom.yaml": {
+      "count": 18,
+      "sha256": "00324312760f83c6e08598ce9b2d6cab773a48dfb221c5044a1289f2d8228bcf"
+    },
+    "microsoft_store_custom.yaml": {
+      "count": 27,
+      "sha256": "781a21884afc0ad9f556a1b8071b7a036543c4d83a2948fb4d3b32317bc59a57"
+    },
+    "microsoft_update_custom.yaml": {
+      "count": 7,
+      "sha256": "1d784a049c47271d107e1e370990d00fa024b8b00e8e7a1d7e10384306f767ff"
+    },
+    "microsoft_connectivity_custom.yaml": {
+      "count": 2,
+      "sha256": "2f46793fff7f26f3da7fa21f5ec1ba11cac2a78b51166b3492651934014e2b59"
+    },
+    "microsoft_custom.yaml": {
+      "count": 4,
+      "sha256": "71cbf0ccbfef2e73345488c201766903ba76423f3fad7ce60a8a4eacd7e6a044"
+    },
+    "adobe_download_direct_custom.yaml": {
+      "count": 11,
+      "sha256": "d84d01e82b8974b3019c2f8daeb7379145cfca36616d1122830fb51dba70fba0"
+    },
+    "adobe_custom.yaml": {
+      "count": 81,
+      "sha256": "f874c0e1fe8b1ba9ce09099fcb425d0ae58bbc5087ee208dcc577cf6773881a7"
+    },
+    "mobile_cn_custom.yaml": {
+      "count": 103,
+      "sha256": "b5becdce743b44a3a7a3b9eca96c8db2840ddda13b97a53649bd143e49eb2e9e"
+    },
+    "mobile_cn_game_custom.yaml": {
+      "count": 16,
+      "sha256": "57898f09c2ee1ebf8358c1cc6b351e870fbcf2428900f93ea6346a2381829898"
+    },
+    "mobile_overseas_custom.yaml": {
+      "count": 28,
+      "sha256": "e6deddd7ed26506a4eec207baa9102de981e5dfa038e68d597d12a3ce85c7500"
+    },
+    "youtube_custom.yaml": {
+      "count": 9,
+      "sha256": "c4cc4d50a8107388fbd282355c35c3f98ca36339217a714cc3b8eeb59a0b3b8b"
+    }
+  }
+}
