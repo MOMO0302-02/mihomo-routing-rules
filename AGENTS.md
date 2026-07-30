@@ -34,3 +34,17 @@ git diff --check
 - `airport_site_custom` 与 `recmata_service_direct_custom` 属于私有工作台规则，不得发布。
 - 修改规则后必须同步 `manifest.json` 中的计数与 SHA-256，并通过验证器。
 - 公开发布、改可见性和删除仓库仍需用户明确授权。
+
+## 跨工具任务接续（Beads）
+
+项目使用本机 stealth 模式 `.beads`。新会话先运行：
+
+```powershell
+bd prime
+bd ready
+```
+
+- `ai-ready/open`：AI 可直接执行的本地工作。
+- `human/blocked`：需要用户选择或人工验收。
+- `external-authorization/blocked`：公开发布、打 tag、推送或外部状态变更。
+- `backlog/deferred`：以后再评估。
