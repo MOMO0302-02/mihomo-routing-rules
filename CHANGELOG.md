@@ -1,5 +1,12 @@
 # Changelog
 
+## v2026.07.29.1GoogleAITK
+
+### Rules
+
+- `ai_custom` 增加 `DOMAIN-SUFFIX,antigravity.google`，覆盖 Google Antigravity 的授权与产品域名；分类保持 22 个，规则由 710 条增至 711 条。
+- 该域名此前无任何规则命中，会落到用户配置的兜底策略，与同一登录链路上的 `*.googleapis.com` 分处不同策略组。`.google` gTLD 不被 `geosite:google` 覆盖，同类域名需逐条显式加入。
+
 ## v2026.07.28.2GoogleAITK
 
 ### Rule quality

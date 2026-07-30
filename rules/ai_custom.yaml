@@ -61,6 +61,7 @@ payload:
   - "DOMAIN-SUFFIX,labs.google"
   - "DOMAIN-SUFFIX,flow.google"
   - "DOMAIN,flow.google.com"
+  - "DOMAIN-SUFFIX,antigravity.google"
   - "DOMAIN-SUFFIX,withgoogle.com"
   - "DOMAIN-SUFFIX,notebooklm.google.com"
   - "DOMAIN-SUFFIX,deepmind.google"
