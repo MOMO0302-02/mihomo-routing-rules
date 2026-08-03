@@ -2,7 +2,7 @@
 项目: Mihomo Routing Rules
 维护方: Codex
 真相源: 本文件 + manifest.json + Git
-最后校准: 2026-07-29
+最后校准: 2026-08-02
 状态源: git
 状态源路径: D:\mihomo-routing-rules
 ---
@@ -15,7 +15,8 @@
 
 ## 当前状态
 
-- 公开规则版本：`v2026.07.29.1GoogleAITK`（22 类、711 条；在 v2026.07.28.2 无损去冗余的基础上，`ai_custom` 新增 `DOMAIN-SUFFIX,antigravity.google`）。
+- 公开规则版本：`v2026.08.02.5GoogleAITK`（22 类、711 条）。规则内容自 `v2026.07.29.1GoogleAITK` 起未变，本次仅对齐上游订阅工作台版本标记；上游期间的 sing-box DNS 继承、DNS 精简与节点变动均不属于本库发布范围。
+- 版本标记只在与上游比对确认内容等价后对齐；条目有实际增删时必须同步 `manifest.json` 计数与 SHA-256、`RULES.md` 索引及 `CHANGELOG.md`。
 - 规则文件、条目数和 SHA-256 以 `manifest.json` 为准。
 - 使用方式以 `README.md`、`RULES.md` 与 `examples/all-in-one.yaml` 为准；示例是合并片段，不是完整订阅。
 - `main` 是开发与文档分支，`release` 是通过验证后的稳定消费分支；公开配置地址只引用 `release`。
