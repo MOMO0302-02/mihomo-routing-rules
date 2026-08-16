@@ -1,5 +1,22 @@
 # Changelog
 
+## v2026.08.17.1GoogleAITK
+
+### Fixes
+
+- 对全库做逐字符审查后修复两处问题。总量保持 779 条（+1 −1），分类仍 22 个。
+- **补收 `cognition.com`**（`ai_custom` 164 → 165）：上一版新增的 `cognition.ai` 实测已 301 迁移至 `cognition.com`，而后者不被任何规则覆盖。属上一版遗漏——与该版专门修复的「域名迁移导致规则静默失效」是同一类问题。
+- **`youtubei.googleapis.com` 此前永远匹配不到**，自首个公开版本 `v2026.07.28.1GoogleAITK` 起即存在：该规则在 `youtube_custom`（建议策略 `Streaming`），却被推荐顺序中更靠前的 `google_drive_custom` 的 `DOMAIN-SUFFIX,googleapis.com`（建议策略 `AI`）先行命中，导致 YouTube 客户端的 API 请求落到 AI 策略组，解锁类节点配置随之失效。
+  - 两个分类存在双向覆盖，只调顺序会把冲突推到另一侧，因此一并处理：`google_drive_custom` 的 `DOMAIN,s.ytimg.com` 已被 `youtube_custom` 的 `DOMAIN-SUFFIX,ytimg.com` 完全覆盖，属跨文件冗余，予以移除（45 → 44）；同时在 `examples/rules.yaml` 与 `examples/all-in-one.yaml` 中把 `youtube_custom` 提到 `google_drive_custom` 之前。
+  - 修复后全库跨策略遮蔽为 **0 条**。
+  - **已按旧顺序把推荐规则复制进自己配置的使用者，需要重新复制一次才能拿到此修复。**
+- 仍有 32 条规则被更早的分类覆盖而不可达，但策略相同（主要是 `ai_custom` 与 `openai_login_custom` 的有意重叠，见 `RULES.md`），无行为影响。
+
+### Notes
+
+- 验证器只检查单文件内的语义冗余，跨分类的遮蔽需要结合推荐顺序单独分析，`validate_rules.py` 不覆盖这一层。
+- 本版仅在公开库落地，未同步上游规则源：两侧当前有 2 条差异（公开库多 `cognition.com`、少 `google_drive_custom` 的 `s.ytimg.com`）。
+
 ## v2026.08.16.1GoogleAITK
 
 ### Rules

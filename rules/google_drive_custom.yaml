@@ -8,7 +8,6 @@ payload:
   - "DOMAIN,script.google.com"
   - "DOMAIN,ssl.google-analytics.com"
   - "DOMAIN,video.google.com"
-  - "DOMAIN,s.ytimg.com"
   - "DOMAIN,apis.google.com"
   - "DOMAIN,inputtools.google.com"
   - "DOMAIN,ipv4.google.com"

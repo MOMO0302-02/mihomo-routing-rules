@@ -87,6 +87,7 @@ payload:
   - "DOMAIN-SUFFIX,codeium.com"
   - "DOMAIN-SUFFIX,devin.ai"
   - "DOMAIN-SUFFIX,cognition.ai"
+  - "DOMAIN-SUFFIX,cognition.com"
   - "DOMAIN-SUFFIX,githubcopilot.com"
   - "DOMAIN,copilot.github.com"
   - "DOMAIN-SUFFIX,copilot.microsoft.com"

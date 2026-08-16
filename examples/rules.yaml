@@ -2,6 +2,7 @@ rules:
   - RULE-SET,openai_login_custom,AI
   - RULE-SET,douyin_direct_custom,DIRECT
   - RULE-SET,tencent_docs_direct_custom,DIRECT
+  - RULE-SET,youtube_custom,Streaming
   - RULE-SET,google_drive_custom,AI
   - RULE-SET,ai_api_direct_custom,DIRECT
   - RULE-SET,ai_api_custom,AI
@@ -20,4 +21,3 @@ rules:
   - RULE-SET,mobile_cn_custom,DIRECT
   - RULE-SET,mobile_cn_game_custom,DIRECT
   - RULE-SET,mobile_overseas_custom,OtherProxy
-  - RULE-SET,youtube_custom,Streaming

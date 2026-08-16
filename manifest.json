@@ -1,7 +1,7 @@
 {
   "schema": 1,
-  "rule_version": "v2026.08.16.1GoogleAITK",
-  "generated_on": "2026-08-16",
+  "rule_version": "v2026.08.17.1GoogleAITK",
+  "generated_on": "2026-08-17",
   "public_categories": 22,
   "total_rules": 779,
   "privacy": {
@@ -23,8 +23,8 @@
       "sha256": "5a4a7810d08fb95c01815b6bae5c9863eef5378c8aded76787ce5e234cc06ae4"
     },
     "google_drive_custom.yaml": {
-      "count": 45,
-      "sha256": "21ca2a94dd3991ba7465bf5a70e408d1b146576f5f4ad0d987e0ee15b6f38619"
+      "count": 44,
+      "sha256": "1c144a9fa82c38adde09622abb9b68df79f6f511ed41826d2876db33d3ab6814"
     },
     "ai_api_direct_custom.yaml": {
       "count": 25,
@@ -35,8 +35,8 @@
       "sha256": "707ccb832da61c72d19fdf2cdadace8495e5eba221b254a07bae6384317d49a6"
     },
     "ai_custom.yaml": {
-      "count": 164,
-      "sha256": "3c4e7a7a2c692a92f0682c776bb654e1dcf0256ac9daa07bcd7f3593161667ba"
+      "count": 165,
+      "sha256": "76993ddc8a3c15e2df931d4a9c75757d8ff93c429fdc1de68957e672aa3ea589"
     },
     "github_custom.yaml": {
       "count": 12,

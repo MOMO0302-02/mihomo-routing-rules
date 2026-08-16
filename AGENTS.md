@@ -2,7 +2,7 @@
 项目: Mihomo Routing Rules
 维护方: Codex
 真相源: 本文件 + manifest.json + Git
-最后校准: 2026-08-16
+最后校准: 2026-08-17
 状态源: git
 状态源路径: F:\AI\Github分流规则
 ---
@@ -15,7 +15,10 @@
 
 ## 当前状态
 
-- 公开规则版本：`v2026.08.16.1GoogleAITK`（22 类、779 条）。2026-08-16 在 `ai_custom` 增加 68 条（96→164），细节见 `CHANGELOG.md`；同批已同步写回上游订阅工作台规则源，两侧逐条一致。**2026-08-16 经用户授权已发布**：commit `6a2245c` 推送 `main`，CI `Validate rules` 通过，`release` 无分叉快进到同一提交，tag `v2026.08.16.1GoogleAITK` 已推送；实测线上 release 的 `ai_custom.yaml` 与本地逐字节一致（164 条）。
+- 公开规则版本：`v2026.08.17.1GoogleAITK`（22 类、779 条）。2026-08-17 逐字符审查后修两处：补 `cognition.com`（`ai_custom` 165），删 `google_drive_custom` 中被 `youtube_custom` 完全覆盖的 `DOMAIN,s.ytimg.com`（44），并把 `youtube_custom` 的推荐顺序提到 `google_drive_custom` 之前。**本版未同步上游，两侧现有 2 条差异**（公开库多 `cognition.com`、少 `s.ytimg.com`），上游同步时需一并处理。
+- 2026-08-17 踩坑（跨分类遮蔽）：`validate_rules.py` **只查单文件内的语义冗余，查不到跨分类遮蔽**。`youtubei.googleapis.com` 从首个公开版本起就永远匹配不到——被推荐顺序中更靠前的 `google_drive_custom` 的 `DOMAIN-SUFFIX,googleapis.com` 吃掉，策略从 `Streaming` 变成 `AI`。**新增宽后缀规则（尤其 `*.googleapis.com` `*.google.com` 这类平台级域）必须结合 `examples/rules.yaml` 的顺序做一次全库遮蔽分析**，且注意两个分类可能双向覆盖，只调顺序会把冲突推到另一侧。判据：被更早分类覆盖且**策略不同**才是真问题，策略相同只是冗余。
+- 2026-08-17：改推荐顺序会影响已复制过配置的使用者——他们不重新复制就拿不到修复。顺序变更必须在 `CHANGELOG.md` 里显式写明这一点。
+- 2026-08-16 在 `ai_custom` 增加 68 条（96→164），细节见 `CHANGELOG.md`；同批已同步写回上游订阅工作台规则源，两侧逐条一致。**2026-08-16 经用户授权已发布**：commit `6a2245c` 推送 `main`，CI `Validate rules` 通过，`release` 无分叉快进到同一提交，tag `v2026.08.16.1GoogleAITK` 已推送；实测线上 release 的 `ai_custom.yaml` 与本地逐字节一致（164 条）。
 - 2026-08-16：本次版本标记由本库先行铸造（规则先在本库和上游规则源落地，上游尚未重新生成），与「只在与上游内容等价后对齐」的常规顺序相反。上游下次生成时应确认它带出同一标记；若上游生成出别的序号，以上游为准回改本库。
 - 版本标记只在与上游比对确认内容等价后对齐；条目有实际增删时必须同步 `manifest.json` 计数与 SHA-256、`RULES.md` 索引及 `CHANGELOG.md`。
 - 2026-08-16 踩坑（`.google` 教训的推广）：域名迁移和产品被收购同样会让旧规则静默失效，且不会报错。实测发现 `notebooklm.google`→`notebook.google`、`lmarena.ai`→`arena.ai`、`hyperbolic.xyz`→`hyperbolic.ai`，以及 Windsurf 被 Cognition 收购后 `codeium.com`→`windsurf.com`→`devin.ai`。**只收 `api.*` 子域而不收主域**是同一类隐患（本次补了 14 家）。维护时应定期对已收录厂商做一次跳转探测，而不是只做「有没有新产品」的增量。
