@@ -15,6 +15,7 @@
 
 ## 当前状态
 
+- 2026-08-17 全项检查补查三维度：①全 Git 历史扫描——11 个提交均无私有规则文件、无代理 URI/订阅链接；②真实内核加载——官方 Mihomo Meta v1.19.29 加载全部 22 provider + 696 条 + 推荐顺序，0 错误（方法见「怎么验证」，`-t` 不够）；③**GitHub Releases 页面已过期**：仓库页只有 1 个 Release（`v2026.07.28.2GoogleAITK` 标着 Latest），而 tag 已到 `v2026.08.17.3GoogleAITK`——访客会误以为库停更在 7 月。建 Release 属公开动作且本机无 gh/API 凭据，待用户在网页端创建或明确授权。尚未做过的检查：全库 ~650 个存量域名的跳转迁移探测（8-16 只测了新增 68 条）；仓库设置层（分支保护等）需账号权限。
 - 公开规则版本：`v2026.08.17.3GoogleAITK`（22 类、696 条）。2026-08-17 冗余审查后无损移除 79 条（53 条被同分类更宽后缀覆盖 + 26 条域名已失效），匹配行为不变，细节见 `CHANGELOG.md`。**与上游差异扩大，同步时需以本库为准整体回灌，不能逐条比对。**
 - 2026-08-17 判据（不可据「主域不解析」删规则）：库内有 133 个域名主域无 A 记录，但全是 CDN 通配域（`ytimg.com`、`githubusercontent.com`、`akamai.net`、`mp.microsoft.com`、`msftconnecttest.com` 等），子域天天在用，`DOMAIN-SUFFIX` 匹配完全正常。判失效必须满足：**多个解析器均无记录 + 带对照组 + 代理亦不可达**，三者缺一不可。
 - 2026-08-17 统计陷阱：查「被谁覆盖」时若对每条规则只记录**第一个**命中的覆盖者，会把同时被 `DOMAIN-KEYWORD` 和 `DOMAIN-SUFFIX` 覆盖的规则误分类。本次因此把零风险集合从 79 条误报成 49 条。统计覆盖关系必须枚举**全部**覆盖者再分类。
@@ -35,6 +36,8 @@
 - GitHub 仓库：`MOMO0302-02/mihomo-routing-rules`。
 
 ## 怎么验证
+
+2026-08-17 重要：**`mihomo -t` 不解析 rule-provider 的 payload 内容**——往规则文件里塞非法规则，`-t` 照样报 successful（负对照实测）。`-t` 只验证配置结构、provider 声明、策略组引用。要验证规则本身能被内核接受，必须实际启动内核让它加载 provider（file 类型、log-level info），看日志有无 `parse classical rule ... error`；测试端口用 17890 避开常用端口，结束后按 PID 清理（bash 的 kill 对 Windows 原生进程可能无效，用 `Stop-Process -Id`，绝不能按映像名杀——会误杀正在跑的客户端）。本库 696 条已用官方核心 Mihomo Meta v1.19.29 按此法验证，0 错误 0 警告。
 
 ```powershell
 python tools\validate_rules.py
