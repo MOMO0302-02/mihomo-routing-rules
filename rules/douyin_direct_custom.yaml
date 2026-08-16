@@ -1,7 +1,5 @@
 payload:
   - "DOMAIN-KEYWORD,douyin"
-  - "DOMAIN-KEYWORD,douyinpic"
-  - "DOMAIN-KEYWORD,douyincdn"
   - "DOMAIN-KEYWORD,aweme"
   - "DOMAIN-SUFFIX,douyin.com"
   - "DOMAIN-SUFFIX,douyinpic.com"

@@ -1,5 +1,21 @@
 # Changelog
 
+## v2026.08.17.3GoogleAITK
+
+### Rule quality
+
+- 移除 4 条被同分类另一个关键词完全覆盖的 `DOMAIN-KEYWORD`：`douyinpic` 与 `douyincdn` 已含于 `douyin`，`tiktokcdn` 与 `tiktokv` 已含于 `tiktok`（关键词按子串匹配）。700 → 696 条，分类保持 22 个，**匹配行为不变**。
+- 上一版的覆盖分析只检查了「关键词覆盖域名」，未检查「关键词覆盖关键词」，因此漏掉这 4 条。
+
+### Documentation
+
+补上三处「范围比分类名字更大」的说明，`RULES.md` 新增「三处需要留意的范围」章节。三者都不是缺陷，但使用者无法从分类名预期其范围，此前没有任何文档提示。
+
+- **`tencent_docs_direct_custom` 实际覆盖整个腾讯生态**：除腾讯文档外还含 `qq.com`（腾讯全部服务）、`myqcloud.com` / `qcloud.com` / `tencent-cloud.net`（腾讯云）与 `gtimg.com` / `gtimg.cn` / `qpic.cn`（腾讯图床）。腾讯云对象存储承载大量第三方网站的静态资源，启用本分类等于把这些资源一并设为直连。**Provider 名称刻意不改**——改名会让所有已引用它的配置失效；改的是文档标注与说明。
+- **六个分类使用 `DOMAIN-KEYWORD`**，按子串匹配，会命中含该词的无关域名。现已在 `RULES.md` 列出全部 11 个关键词及其所属分类，并说明保留原因（这些服务的 CDN 域名多且常变，穷举会漏）与移除方式。
+- **`ai_custom` 含 25 条通用第三方服务域名**（14 家：Auth0、WorkOS、Arkose、Cloudflare Turnstile、Statsig、LaunchDarkly、Sentry、Datadog、Segment、Intercom、SendGrid、LiveKit 等）。这些服务被成千上万个网站使用，启用 `ai_custom` 后访问任何网站时其错误上报、行为分析与验证码流量都会进入 AI 策略组。保留是因为缺了它们 ChatGPT 等产品的登录会卡住；文档已列出完整清单，只用 API 的使用者可自行删除这 25 行。
+- 同时补充记录：`youtube_custom` 必须排在 `google_drive_custom` 之前的原因。
+
 ## v2026.08.17.2GoogleAITK
 
 ### Rule quality

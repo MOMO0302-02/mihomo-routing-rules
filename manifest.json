@@ -1,9 +1,9 @@
 {
   "schema": 1,
-  "rule_version": "v2026.08.17.2GoogleAITK",
+  "rule_version": "v2026.08.17.3GoogleAITK",
   "generated_on": "2026-08-17",
   "public_categories": 22,
-  "total_rules": 700,
+  "total_rules": 696,
   "privacy": {
     "contains_proxy_nodes": false,
     "contains_subscription_urls": false,
@@ -15,8 +15,8 @@
       "sha256": "aae7f4a2b9d9bfbfe26a0e633b254bf5ae617904f5c198653fe1efdd81702209"
     },
     "douyin_direct_custom.yaml": {
-      "count": 35,
-      "sha256": "3fb5c5c444117a2852e27950bee7e502c73a7b4daf7df5e29a0daf07f6950fd7"
+      "count": 33,
+      "sha256": "4fe565b5a066454d186951a570973d815b8ddaf0670c72cd7137d12796b83ce5"
     },
     "tencent_docs_direct_custom.yaml": {
       "count": 11,
@@ -43,8 +43,8 @@
       "sha256": "0a1488bc5da1b5f1670ea41742d5b9ecb3e05e3d6cc9b2c6075548bd2927eb57"
     },
     "tiktok_custom.yaml": {
-      "count": 45,
-      "sha256": "ed7284932a76542cc8ed5c4896f0773b11dc8cf8ef967a5863007f709b8fabbf"
+      "count": 43,
+      "sha256": "f08aeed1907fa8ecd7193e8ae7532ed5d249f67bc5c34655656d97a06bd651a9"
     },
     "crypto_custom.yaml": {
       "count": 37,
