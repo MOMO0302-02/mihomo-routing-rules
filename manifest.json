@@ -1,9 +1,9 @@
 {
   "schema": 1,
-  "rule_version": "v2026.08.02.5GoogleAITK",
-  "generated_on": "2026-08-02",
+  "rule_version": "v2026.08.16.1GoogleAITK",
+  "generated_on": "2026-08-16",
   "public_categories": 22,
-  "total_rules": 711,
+  "total_rules": 779,
   "privacy": {
     "contains_proxy_nodes": false,
     "contains_subscription_urls": false,
@@ -35,8 +35,8 @@
       "sha256": "707ccb832da61c72d19fdf2cdadace8495e5eba221b254a07bae6384317d49a6"
     },
     "ai_custom.yaml": {
-      "count": 96,
-      "sha256": "2222e1f70796ea947ffe438e17a5d4a9ea111744074ea140fb6133085b9206b5"
+      "count": 164,
+      "sha256": "3c4e7a7a2c692a92f0682c776bb654e1dcf0256ac9daa07bcd7f3593161667ba"
     },
     "github_custom.yaml": {
       "count": 12,
