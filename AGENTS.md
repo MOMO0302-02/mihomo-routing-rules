@@ -15,7 +15,7 @@
 
 ## 当前状态
 
-- 公开规则版本：`v2026.08.16.1GoogleAITK`（22 类、779 条）。2026-08-16 在 `ai_custom` 增加 68 条（96→164），细节见 `CHANGELOG.md`；同批已同步写回上游订阅工作台规则源，两侧逐条一致。**改动目前只在本地工作区，提交、推送与打 tag 均待用户授权。**
+- 公开规则版本：`v2026.08.16.1GoogleAITK`（22 类、779 条）。2026-08-16 在 `ai_custom` 增加 68 条（96→164），细节见 `CHANGELOG.md`；同批已同步写回上游订阅工作台规则源，两侧逐条一致。**2026-08-16 经用户授权已发布**：commit `6a2245c` 推送 `main`，CI `Validate rules` 通过，`release` 无分叉快进到同一提交，tag `v2026.08.16.1GoogleAITK` 已推送；实测线上 release 的 `ai_custom.yaml` 与本地逐字节一致（164 条）。
 - 2026-08-16：本次版本标记由本库先行铸造（规则先在本库和上游规则源落地，上游尚未重新生成），与「只在与上游内容等价后对齐」的常规顺序相反。上游下次生成时应确认它带出同一标记；若上游生成出别的序号，以上游为准回改本库。
 - 版本标记只在与上游比对确认内容等价后对齐；条目有实际增删时必须同步 `manifest.json` 计数与 SHA-256、`RULES.md` 索引及 `CHANGELOG.md`。
 - 2026-08-16 踩坑（`.google` 教训的推广）：域名迁移和产品被收购同样会让旧规则静默失效，且不会报错。实测发现 `notebooklm.google`→`notebook.google`、`lmarena.ai`→`arena.ai`、`hyperbolic.xyz`→`hyperbolic.ai`，以及 Windsurf 被 Cognition 收购后 `codeium.com`→`windsurf.com`→`devin.ai`。**只收 `api.*` 子域而不收主域**是同一类隐患（本次补了 14 家）。维护时应定期对已收录厂商做一次跳转探测，而不是只做「有没有新产品」的增量。
