@@ -1,5 +1,20 @@
 # Changelog
 
+## v2026.08.17.2GoogleAITK
+
+### Rule quality
+
+- 全库冗余审查后**无损移除 79 条规则**，779 → 700 条，分类保持 22 个。**匹配行为完全不变**，已逐条验证。
+- **53 条被同分类内更宽的 `DOMAIN-SUFFIX` 完全覆盖**：例如 30 条 `*.adobe.com` / `*.adobe.io` 子域被 `adobe.com` / `adobe.io` 覆盖、5 条 `*.mp.microsoft.com` 被 `mp.microsoft.com` 覆盖、4 条 `cos.ap-*.myqcloud.com` 被 `myqcloud.com` 覆盖、`events.openai.com` 与 `cdn.openai.com` 被 `openai.com` 覆盖等。等价性验证：对每条被删规则的主域与一个探针子域比对新旧归属，**归属变化 0 个**。
+- **26 条域名已失效**：在 AliDNS、DNSPod、AliDNS 备用三个解析器上均无记录，经代理亦不可达，测试带对照组（`baidu.com` 正常解析、构造的假域名正常失败）。其中多条本就是写错或已改版的域名，且**正确域名早已在库内**——`bankcomm.com.cn`→`bankcomm.com`、`12123.gov.cn`→`122.gov.cn`、`12306img.cn`→`12306.cn`、`meituanimg.com`→`meituan.com`、`disneypluscdn.com`→`disneyplus.com`、`api.openrouter.ai`/`api.windsurf.com`/`api.luma.ai`→各自主域。另有 `login.openai.com`（OpenAI 已改用 `auth.openai.com`）、Google 已退役的 `clients0/7/8/9.google.com` 与 `lh0/1/7/8/9.google.com`。
+- `api.openrouter.ai` 属规则本身写错：OpenRouter 的接口是 `openrouter.ai/api/v1`，从来没有 `api.` 子域。
+
+### Not changed
+
+- 保留 32 条被更早分类覆盖而不可达的规则：这些分类策略相同，当前无行为影响，但使用者若重新映射策略组即会生效，删除反而埋雷。
+- 保留全部 `DOMAIN-KEYWORD` 及其覆盖的显式后缀。
+- 133 个主域无 A 记录的域名**全部保留**：`ytimg.com`、`githubusercontent.com`、`akamai.net`、`mp.microsoft.com`、`msftconnecttest.com` 等属 CDN 通配域，主域本就不解析而子域在用，`DOMAIN-SUFFIX` 匹配正常。**不可据「主域不解析」判定规则失效。**
+
 ## v2026.08.17.1GoogleAITK
 
 ### Fixes

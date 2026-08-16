@@ -3,7 +3,6 @@ payload:
   - "DOMAIN,chat.openai.com"
   - "DOMAIN,auth.openai.com"
   - "DOMAIN,auth0.openai.com"
-  - "DOMAIN,login.openai.com"
   - "DOMAIN,android.chat.openai.com"
   - "DOMAIN,ios.chat.openai.com"
   - "DOMAIN,desktop.chat.openai.com"

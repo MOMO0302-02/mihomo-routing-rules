@@ -1,7 +1,5 @@
 payload:
   - "DOMAIN-SUFFIX,offapi.net"
-  - "DOMAIN-SUFFIX,docs.qq.com"
-  - "DOMAIN-SUFFIX,docs.gtimg.com"
   - "DOMAIN-SUFFIX,gtimg.com"
   - "DOMAIN-SUFFIX,gtimg.cn"
   - "DOMAIN-SUFFIX,qpic.cn"
@@ -10,9 +8,5 @@ payload:
   - "DOMAIN-SUFFIX,myqcloud.com"
   - "DOMAIN-SUFFIX,qcloud.com"
   - "DOMAIN-SUFFIX,tencent-cloud.net"
-  - "DOMAIN-SUFFIX,cos.ap-guangzhou.myqcloud.com"
-  - "DOMAIN-SUFFIX,cos.ap-shanghai.myqcloud.com"
-  - "DOMAIN-SUFFIX,cos.ap-beijing.myqcloud.com"
-  - "DOMAIN-SUFFIX,cos.ap-hongkong.myqcloud.com"
   - "DOMAIN-KEYWORD,tencent-doc"
   - "DOMAIN-KEYWORD,doc.weixin"

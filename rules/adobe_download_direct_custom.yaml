@@ -4,7 +4,4 @@ payload:
   - "DOMAIN-SUFFIX,swupdl.adobe.com"
   - "DOMAIN-SUFFIX,swupmf.adobe.com"
   - "DOMAIN-SUFFIX,download.adobe.com"
-  - "DOMAIN-SUFFIX,downloads.adobe.com"
-  - "DOMAIN-SUFFIX,download.adobecc.com"
   - "DOMAIN-SUFFIX,adobedownload.112.2o7.net"
-  - "DOMAIN-SUFFIX,adobe-download.akadns.net"

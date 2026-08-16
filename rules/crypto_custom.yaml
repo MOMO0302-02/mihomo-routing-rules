@@ -32,7 +32,6 @@ payload:
   - "DOMAIN-SUFFIX,pancakeswap.finance"
   - "DOMAIN-SUFFIX,dexscreener.com"
   - "DOMAIN-SUFFIX,dextools.io"
-  - "DOMAIN-SUFFIX,web3.okx.com"
   - "DOMAIN-KEYWORD,pokepay"
   - "DOMAIN-SUFFIX,pokepay.cc"
   - "DOMAIN-SUFFIX,pokepay.io"

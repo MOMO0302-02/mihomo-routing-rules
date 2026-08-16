@@ -1,13 +1,6 @@
 payload:
   - "DOMAIN-SUFFIX,mp.microsoft.com"
   - "DOMAIN-SUFFIX,store.microsoft.com"
-  - "DOMAIN-SUFFIX,displaycatalog.mp.microsoft.com"
-  - "DOMAIN-SUFFIX,purchase.mp.microsoft.com"
-  - "DOMAIN-SUFFIX,licensing.mp.microsoft.com"
-  - "DOMAIN-SUFFIX,storeedgefd.dsx.mp.microsoft.com"
-  - "DOMAIN-SUFFIX,storesdk.dsx.mp.microsoft.com"
-  - "DOMAIN-SUFFIX,livetileedge.dsx.mp.microsoft.com"
-  - "DOMAIN-SUFFIX,dsx.mp.microsoft.com"
   - "DOMAIN-SUFFIX,store-images.microsoft.com"
   - "DOMAIN-SUFFIX,store-images.s-microsoft.com"
   - "DOMAIN-SUFFIX,storecatalogrevocation.storequality.microsoft.com"
