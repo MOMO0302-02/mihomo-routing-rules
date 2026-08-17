@@ -160,3 +160,5 @@ payload:
   - "DOMAIN-SUFFIX,hyperbolic.xyz"
   - "DOMAIN-SUFFIX,hyperbolic.ai"
   - "DOMAIN-SUFFIX,chutes.ai"
+  - "DOMAIN-SUFFIX,intercom.com"
+  - "DOMAIN-SUFFIX,runway.com"

@@ -10,3 +10,4 @@ payload:
   - "DOMAIN-SUFFIX,tencent-cloud.net"
   - "DOMAIN-KEYWORD,tencent-doc"
   - "DOMAIN-KEYWORD,doc.weixin"
+  - "DOMAIN-SUFFIX,cloud.tencent.com"

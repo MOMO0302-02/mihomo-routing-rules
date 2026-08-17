@@ -1,9 +1,9 @@
 {
   "schema": 1,
-  "rule_version": "v2026.08.17.3GoogleAITK",
+  "rule_version": "v2026.08.17.4GoogleAITK",
   "generated_on": "2026-08-17",
   "public_categories": 22,
-  "total_rules": 696,
+  "total_rules": 706,
   "privacy": {
     "contains_proxy_nodes": false,
     "contains_subscription_urls": false,
@@ -19,8 +19,8 @@
       "sha256": "4fe565b5a066454d186951a570973d815b8ddaf0670c72cd7137d12796b83ce5"
     },
     "tencent_docs_direct_custom.yaml": {
-      "count": 11,
-      "sha256": "970a276df7747594ad002136b6e21e2785bb536fed8e6b84a6ad575eeaab5402"
+      "count": 12,
+      "sha256": "8669029c52e8361e57448908556c691de07459b592f67e82acce0de101e19cce"
     },
     "google_drive_custom.yaml": {
       "count": 34,
@@ -35,36 +35,36 @@
       "sha256": "c38583ac61b4397364b7658607737ff881a028a803b17555468e79da9b1a0a6c"
     },
     "ai_custom.yaml": {
-      "count": 161,
-      "sha256": "61064c2735f9a8beba4881219e31e9cb9f309d0e80a41a6b5324258689c3004f"
+      "count": 163,
+      "sha256": "a973b2e22e4242c138b962c276763a9a864588eca835963ca72a0ffaa5889b94"
     },
     "github_custom.yaml": {
-      "count": 12,
-      "sha256": "0a1488bc5da1b5f1670ea41742d5b9ecb3e05e3d6cc9b2c6075548bd2927eb57"
+      "count": 13,
+      "sha256": "80159edcaf0f7d69addd0b466ad9897617298cb7ef02fc2107ba1974f854c182"
     },
     "tiktok_custom.yaml": {
       "count": 43,
       "sha256": "f08aeed1907fa8ecd7193e8ae7532ed5d249f67bc5c34655656d97a06bd651a9"
     },
     "crypto_custom.yaml": {
-      "count": 37,
-      "sha256": "ef98eeabecc9556e676de5ca390bffaf264726b420e4036de080c96db024a7c6"
+      "count": 39,
+      "sha256": "79fdfa795fa489df14d695af679c43b45152b9eda77e55a14e884b5489d89fe8"
     },
     "payment_custom.yaml": {
-      "count": 15,
-      "sha256": "8ea35f15a1e1cec8532a42fb48b29173c32dd4f0690677a297492e29c87bd9c5"
+      "count": 16,
+      "sha256": "186bc12d70cc966144f86f1629a223f2e397b9ae757b84e3d9413ace3d3f515d"
     },
     "streaming_custom.yaml": {
       "count": 17,
       "sha256": "7ba6db184641ecca83661de3340e09e453231055c408119744e6a46b347d4313"
     },
     "microsoft_store_custom.yaml": {
-      "count": 20,
-      "sha256": "32131416c901ab0afa27698aa04abce645f5e105255f684e0c4a180f3edf8f38"
+      "count": 22,
+      "sha256": "a361cda0e3b800b9d8ba7214df4dd66b40d05dfc99b206ae309d76a2827fa590"
     },
     "microsoft_update_custom.yaml": {
-      "count": 5,
-      "sha256": "f1937d2b8c5ab66c9bc4b0edec72eb5909e7c2389ea164402950c07fe5d93d83"
+      "count": 6,
+      "sha256": "69e97364773c7823e6c0d5ffce60bbfd634581fd8bcedc0a01e555ae4b831fc9"
     },
     "microsoft_connectivity_custom.yaml": {
       "count": 2,

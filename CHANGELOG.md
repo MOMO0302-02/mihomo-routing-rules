@@ -1,5 +1,24 @@
 # Changelog
 
+## v2026.08.17.4GoogleAITK
+
+### Rules
+
+- 对**全库存量域名**首次做迁移探测（662 个域名逐个发请求，此前只测过 8-16 新增的 68 条），发现 60 个跨站跳转；逐个甄别后**补收 10 条真实迁移/缺口**（696 → 706），其余为新旧域名均已收录的正常跳转或不应收录的官网营销跳转：
+  - `vscode.dev`（GitHub：`github.dev` 的实际编辑器域）
+  - `cdn-dynmedia-1.microsoft.com`、`microsoftstore.com`（Microsoft Store：图片 CDN 已从 akamaized.net 迁来；商店新域）
+  - `windows.microsoft.com`（Microsoft 更新：`windows.com` 的跳转目标）
+  - `intercom.com`、`runway.com`（AI：Intercom 与 Runway 均已把主域迁到 .com，此前只收了 `intercom.io` / `runwayml.com`）
+  - `wallet.google.com`（支付：Google Pay 已并入 Google Wallet）
+  - `phantom.com`、`reown.com`（加密货币：Phantom 钱包由 `.app` 迁至 `.com`；WalletConnect 的 Web3Modal 品牌重塑为 Reown）
+  - `cloud.tencent.com`（腾讯直连：`qcloud.com` 的跳转目标，此前未覆盖会落 MATCH 走代理）
+- 甄别中刻意不收的跳转目标：`vercel.com`（通用托管平台官网，收进 AI 属过宽）、`www.twilio.com`（Segment 母公司官网）、`www.microsoft.com` / `developers.google.com`（营销/文档页跳转，功能域名均已覆盖）。
+
+### Validator
+
+- `validate_rules.py` 新增三道语义门禁，把 2026-08-17 手工审查发现的三类问题固化进 CI：①同分类内 `DOMAIN-SUFFIX` 被更宽后缀覆盖；②同分类内 `DOMAIN-KEYWORD` 含另一关键词为子串；③**跨策略遮蔽**——规则被推荐顺序中更靠前、且建议策略不同的分类先行命中（即 `youtubei.googleapis.com` 那类永不生效的规则）。三道门禁均经负对照验证（注入违规规则确认报错、恢复后通过）。同策略遮蔽与分类内关键词盖域名仍属有意设计，不报错。
+- 全部 706 条经官方核心 Mihomo Meta v1.19.29 实际加载验证，0 错误。
+
 ## v2026.08.17.3GoogleAITK
 
 ### Rule quality

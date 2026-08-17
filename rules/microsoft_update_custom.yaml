@@ -4,3 +4,4 @@ payload:
   - "DOMAIN-SUFFIX,delivery.mp.microsoft.com"
   - "DOMAIN-SUFFIX,prod.do.dsp.mp.microsoft.com"
   - "DOMAIN-SUFFIX,windows.com"
+  - "DOMAIN-SUFFIX,windows.microsoft.com"

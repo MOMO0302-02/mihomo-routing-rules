@@ -132,6 +132,7 @@ def main() -> int:
 
     total = 0
     rule_owners: dict[str, set[str]] = {}
+    payloads: dict[str, list[str]] = {}
     for filename in sorted(actual_files):
         path = RULES_DIR / filename
         try:
@@ -139,6 +140,7 @@ def main() -> int:
         except (OSError, UnicodeError, ValueError) as exc:
             errors.append(str(exc))
             continue
+        payloads[path.stem] = payload
         total += len(payload)
         for rule in payload:
             rule_owners.setdefault(rule, set()).add(path.stem)
@@ -161,6 +163,77 @@ def main() -> int:
             errors.append(
                 f"unexpected cross-category duplicate: {rule} in {sorted(owners)}"
             )
+
+    # Semantic-coverage gates. Three failure modes shipped silently before they
+    # were caught by hand on 2026-08-17; each is now a hard error:
+    #   1. a DOMAIN-SUFFIX fully covered by a broader DOMAIN-SUFFIX in the same
+    #      category (the same-category DOMAIN case is caught in read_payload);
+    #   2. a DOMAIN-KEYWORD containing another keyword of the same category as
+    #      a substring (keyword matching is substring-based, so it never fires);
+    #   3. a rule shadowed by an earlier category in the recommended order whose
+    #      suggested policy differs - the rule can never match, and traffic
+    #      lands in the wrong policy group (e.g. youtubei.googleapis.com).
+    # Same-policy shadowing and keyword-over-domain coverage inside one
+    # category stay allowed: both are deliberate (see RULES.md).
+    for name, payload in payloads.items():
+        suffixes = [r.partition(",")[2] for r in payload if r.startswith("DOMAIN-SUFFIX,")]
+        for target in suffixes:
+            for other in suffixes:
+                if target != other and target.endswith(f".{other}"):
+                    errors.append(
+                        f"{name}: DOMAIN-SUFFIX,{target} is fully covered by "
+                        f"DOMAIN-SUFFIX,{other} in the same category"
+                    )
+        keywords = [r.partition(",")[2] for r in payload if r.startswith("DOMAIN-KEYWORD,")]
+        for target in keywords:
+            for other in keywords:
+                if target != other and other in target:
+                    errors.append(
+                        f"{name}: DOMAIN-KEYWORD,{target} is fully covered by "
+                        f"DOMAIN-KEYWORD,{other} in the same category"
+                    )
+
+    rule_order_entries = re.findall(
+        r"^  - RULE-SET,([a-z0-9_]+),(\S+)$",
+        RULE_ORDER_PATH.read_text(encoding="utf-8"),
+        flags=re.MULTILINE,
+    )
+    order_names = [name for name, _ in rule_order_entries]
+    order_policy = dict(rule_order_entries)
+    missing_from_order = sorted(set(payloads) - set(order_names))
+    if missing_from_order:
+        errors.append(f"examples/rules.yaml missing categories: {missing_from_order}")
+
+    def covers(rule: str, domain: str) -> bool:
+        kind, _, target = rule.partition(",")
+        if kind == "DOMAIN":
+            return domain == target
+        if kind == "DOMAIN-SUFFIX":
+            return domain == target or domain.endswith(f".{target}")
+        if kind == "DOMAIN-KEYWORD":
+            return target in domain
+        return False
+
+    for position, name in enumerate(order_names):
+        for rule in payloads.get(name, []):
+            kind, _, target = rule.partition(",")
+            if kind not in {"DOMAIN", "DOMAIN-SUFFIX"}:
+                continue
+            for earlier in order_names[:position]:
+                if order_policy[earlier] == order_policy[name]:
+                    continue
+                shadow = next(
+                    (er for er in payloads.get(earlier, []) if covers(er, target)),
+                    None,
+                )
+                if shadow:
+                    errors.append(
+                        f"cross-policy shadow: {name}:{rule} "
+                        f"({order_policy[name]}) can never match - "
+                        f"{earlier}:{shadow} ({order_policy[earlier]}) "
+                        "comes first in the recommended order"
+                    )
+                    break
 
     public_documents: dict[Path, str] = {}
     for path in (

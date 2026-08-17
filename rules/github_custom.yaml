@@ -11,3 +11,4 @@ payload:
   - "DOMAIN-SUFFIX,githubnext.com"
   - "DOMAIN-SUFFIX,github-cloud.s3.amazonaws.com"
   - "DOMAIN-SUFFIX,blob.core.windows.net"
+  - "DOMAIN-SUFFIX,vscode.dev"

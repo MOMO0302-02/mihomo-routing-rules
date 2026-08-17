@@ -14,3 +14,4 @@ payload:
   - "DOMAIN-SUFFIX,pay.google.com"
   - "DOMAIN-SUFFIX,payments.google.com"
   - "DOMAIN-SUFFIX,wallet.google"
+  - "DOMAIN-SUFFIX,wallet.google.com"
