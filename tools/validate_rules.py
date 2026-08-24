@@ -299,6 +299,11 @@ def main() -> int:
 
     if "`main`" not in readme or "`release`" not in readme:
         errors.append("README must explain main and release branch roles")
+    if f"{len(actual_files)} 个分类" not in readme:
+        errors.append(
+            f"README category count is stale: expected mention of "
+            f"'{len(actual_files)} 个分类'"
+        )
     if RAW_PREFIX not in readme or CDN_PREFIX not in readme:
         errors.append("README must document Raw and CDN stable URL formats")
 
