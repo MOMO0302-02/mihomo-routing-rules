@@ -15,6 +15,7 @@
 
 ## 当前状态
 
+- 公开规则版本：`v2026.08.24.4GoogleAITK`（**23 类、925 条**）。2026-08-24 晚间四项升级：①新增 `ntp_direct_custom`（16 条，DoH 全验活；**必须排推荐顺序最前**，否则 `time.windows.com` 被 Microsoft 分类的 `windows.com` 后缀截走）；②CI 加 `core-load` job（真内核加载门禁，内核版本钉在 workflow `MIHOMO_VERSION`，内核发新版时手动升）；③tag 推送自动建 Release + release 分支推送自动清 jsDelivr 缓存（`release.yml` / `purge-cdn.yml`）；④体检脚本入库 `tools/`（`coretest.py` / `check_liveness.py` / `probe_migration.py` / `changelog_section.py`），以后不再每轮临时重写。注意：`coretest.py --binary` 在 Windows 要传**绝对路径**（CreateProcess 不认相对正斜杠路径）。
 - 2026-08-24 晚间体检：对当日新增的 203 条做迁移+存活探测——25 个跨站跳转中 22 个目标已覆盖，3 个未覆盖目标（`aka.ms` 根跳转占位页、JetBrains 官网×2）均属营销/占位页按判据不收；50 个无响应域经 DoH 三重判定**全部存活**（均为主域无 A 的正常 CDN 形态）。909 条真内核加载 0 错误。**本轮零规则变更**，仅修文档。
 - 2026-08-24 **测活方法被环境变化打破（重要）**：本机 Clash Party 开启了 fake-ip DNS 接管——即使用 `Resolve-DnsName -Server 223.5.5.5` 直查外部解析器，UDP 53 也被截走，任何域名（包括不存在的）都返回 `198.18.0.x` 段假 IP，8-17 的 DNS 测活方法**对照组已失效**。现行有效方法：**DoH**（`curl -x 代理 "https://dns.google/resolve?name=域名&type=A"`），按返回 JSON 的 `Status` 判定（0=存在、3=NXDOMAIN），Answer 有无区分「有 A 记录」与「主域无 A 的 CDN 形态」；对照组必须同跑（baidu.com 应 LIVE、构造假域名应 Status=3）。**任何测活结论前先看对照组，对照组不对全批作废。**
 - 2026-08-24 与**官方 geosite 的定位关系已确定：互补，不是替代**。与内核自带的 `geosite:category-ai-!cn`（MetaCubeX 维护）双向比对：官方 179 条里本库未覆盖 85 条（收 61、剔 24），本库有而官方没有 118 条。判据差异在于**官方名单只回答「是不是 AI 网站」，本库还要回答「该走哪个出口」**——国内 API 直连 vs 网页代理、账号类必须钉固定出口 IP，这些官方名单表达不了。**实测官方 `geosite:cn`（11 万条）里含 `qoder.com`**，只靠官方名单会把它判成国内站直连。官方名单的正确用法是当**参照与补充源**：`temp/gap_vs_ref.py` 可直接换 `temp/geo_ai.list` 复跑。

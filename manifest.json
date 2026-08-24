@@ -1,9 +1,9 @@
 {
   "schema": 1,
-  "rule_version": "v2026.08.24.3GoogleAITK",
+  "rule_version": "v2026.08.24.4GoogleAITK",
   "generated_on": "2026-08-24",
-  "public_categories": 22,
-  "total_rules": 909,
+  "public_categories": 23,
+  "total_rules": 926,
   "privacy": {
     "contains_proxy_nodes": false,
     "contains_subscription_urls": false,
@@ -35,8 +35,8 @@
       "sha256": "c38583ac61b4397364b7658607737ff881a028a803b17555468e79da9b1a0a6c"
     },
     "ai_custom.yaml": {
-      "count": 242,
-      "sha256": "a0d4b4b0426cc02896cf33ae2fc245676e6afd37178af1d2530ded0263ddfbdd"
+      "count": 243,
+      "sha256": "de7f85a5cfb3133fb49321de6652f2a331f9305a4e594bb901e554f210c982dd"
     },
     "github_custom.yaml": {
       "count": 15,
@@ -97,6 +97,10 @@
     "youtube_custom.yaml": {
       "count": 8,
       "sha256": "cd9b6f5fa3f5d28bce7e0e68cc7e1b6b6cd7582ce2360dd85e6405505cdda835"
+    },
+    "ntp_direct_custom.yaml": {
+      "count": 16,
+      "sha256": "9012a927c0d2c49d708564b21bc403fd140087282d895af1da454d205e6653b8"
     }
   }
 }

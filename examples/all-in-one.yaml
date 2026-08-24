@@ -2,6 +2,13 @@
 # Merge these root-level sections into an existing configuration.
 
 rule-providers:
+  ntp_direct_custom:
+    type: http
+    behavior: classical
+    format: yaml
+    url: https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/release/rules/ntp_direct_custom.yaml
+    path: ./ruleset/ntp_direct_custom.yaml
+    interval: 86400
   openai_login_custom:
     type: http
     behavior: classical
@@ -179,6 +186,7 @@ rule-providers:
     interval: 86400
 
 rules:
+  - RULE-SET,ntp_direct_custom,DIRECT
   - RULE-SET,openai_login_custom,AI
   - RULE-SET,douyin_direct_custom,DIRECT
   - RULE-SET,tencent_docs_direct_custom,DIRECT

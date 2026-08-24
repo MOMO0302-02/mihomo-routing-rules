@@ -1,5 +1,22 @@
 # Changelog
 
+## v2026.08.24.4GoogleAITK
+
+### New category
+
+- 新增第 23 个分类 **`ntp_direct_custom`（时间同步直连，16 条）**：`ntp.org` 全生态、Windows/Apple/Android/Google/Cloudflare/NIST 的时间服务器、阿里/腾讯/国家授时中心的国内源。时间同步（NTP）走代理会静默失败或漂移，进而引发证书校验错误与登录异常；官方 geosite **没有** ntp 分类（实测 404），只能自建。16 条全部经 DoH 存活验证。
+- 推荐顺序中 `ntp_direct_custom` 放在**最前**：`time.windows.com` 若排在 Microsoft 分类之后会被 `windows.com` 后缀先命中而走代理，时间同步属于必须最先直连放行的基础设施。
+
+### Automation
+
+- CI 新增 **真内核加载门禁**（`core-load` job）：每次推送自动下载官方 Mihomo（版本钉在 workflow 的 `MIHOMO_VERSION`）实际加载全部 23 个 provider，出错即红。此前这一金标准只能手动跑——`mihomo -t` 不解析 provider 内容，校验器也替代不了内核本身。
+- 新增 **tag 推送自动建 GitHub Release**（`release.yml`）：Release 正文取自 `CHANGELOG.md` 对应版本节，杜绝「打了 tag 忘发 Release、首页 Latest 过期」的人为疏漏。
+- 新增 **release 分支推送自动清 jsDelivr 缓存**（`purge-cdn.yml`）：此前新版本要等 CDN 缓存自然过期（最长 12 小时以上）才对 jsDelivr 用户生效，现在发布即生效。
+
+### Tooling
+
+- 三个此前每轮临时重写的体检脚本正式入库 `tools/`：`coretest.py`（真内核加载测试，CI 与本地共用）、`check_liveness.py`（DoH 测活，内置强制对照组，对照不过整批拒绝出结果）、`probe_migration.py`（全库跨站跳转探测 + 目标覆盖/策略一致性分析）。`changelog_section.py` 供 Release 工作流提取版本说明。
+
 ## v2026.08.24.3GoogleAITK
 
 ### Rules

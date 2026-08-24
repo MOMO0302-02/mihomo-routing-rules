@@ -1,11 +1,12 @@
 # 规则索引
 
-当前公开版本：`v2026.08.24.3GoogleAITK`，共 22 个分类、909 条 classical 规则。
+当前公开版本：`v2026.08.24.4GoogleAITK`，共 23 个分类、926 条 classical 规则。
 
 配置中的策略名只是建议值，必须替换成你现有配置里真实存在的策略组。直连分类建议保持 `DIRECT`；其余分类可按自己的节点和地区需求映射。
 
 | 分类 | Provider 名称 | 规则数 | 建议策略 | GitHub Raw | jsDelivr |
 |---|---|---:|---|---|---|
+| 时间同步直连 | `ntp_direct_custom` | 16 | `DIRECT` | [Raw](https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/release/rules/ntp_direct_custom.yaml) | [CDN](https://cdn.jsdelivr.net/gh/MOMO0302-02/mihomo-routing-rules@release/rules/ntp_direct_custom.yaml) |
 | OpenAI 登录 | `openai_login_custom` | 29 | `AI` | [Raw](https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/release/rules/openai_login_custom.yaml) | [CDN](https://cdn.jsdelivr.net/gh/MOMO0302-02/mihomo-routing-rules@release/rules/openai_login_custom.yaml) |
 | 抖音直连 | `douyin_direct_custom` | 33 | `DIRECT` | [Raw](https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/release/rules/douyin_direct_custom.yaml) | [CDN](https://cdn.jsdelivr.net/gh/MOMO0302-02/mihomo-routing-rules@release/rules/douyin_direct_custom.yaml) |
 | 腾讯服务直连（含腾讯云，见下） | `tencent_docs_direct_custom` | 12 | `DIRECT` | [Raw](https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/release/rules/tencent_docs_direct_custom.yaml) | [CDN](https://cdn.jsdelivr.net/gh/MOMO0302-02/mihomo-routing-rules@release/rules/tencent_docs_direct_custom.yaml) |
@@ -13,7 +14,7 @@
 | Google Drive | `google_drive_custom` | 34 | `AI` | [Raw](https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/release/rules/google_drive_custom.yaml) | [CDN](https://cdn.jsdelivr.net/gh/MOMO0302-02/mihomo-routing-rules@release/rules/google_drive_custom.yaml) |
 | 指定 AI API 直连 | `ai_api_direct_custom` | 25 | `DIRECT` | [Raw](https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/release/rules/ai_api_direct_custom.yaml) | [CDN](https://cdn.jsdelivr.net/gh/MOMO0302-02/mihomo-routing-rules@release/rules/ai_api_direct_custom.yaml) |
 | AI API | `ai_api_custom` | 42 | `AI` | [Raw](https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/release/rules/ai_api_custom.yaml) | [CDN](https://cdn.jsdelivr.net/gh/MOMO0302-02/mihomo-routing-rules@release/rules/ai_api_custom.yaml) |
-| 综合 AI | `ai_custom` | 242 | `AI` | [Raw](https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/release/rules/ai_custom.yaml) | [CDN](https://cdn.jsdelivr.net/gh/MOMO0302-02/mihomo-routing-rules@release/rules/ai_custom.yaml) |
+| 综合 AI | `ai_custom` | 243 | `AI` | [Raw](https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/release/rules/ai_custom.yaml) | [CDN](https://cdn.jsdelivr.net/gh/MOMO0302-02/mihomo-routing-rules@release/rules/ai_custom.yaml) |
 | GitHub | `github_custom` | 15 | `GitHub` | [Raw](https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/release/rules/github_custom.yaml) | [CDN](https://cdn.jsdelivr.net/gh/MOMO0302-02/mihomo-routing-rules@release/rules/github_custom.yaml) |
 | TikTok / CapCut | `tiktok_custom` | 45 | `TikTok` | [Raw](https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/release/rules/tiktok_custom.yaml) | [CDN](https://cdn.jsdelivr.net/gh/MOMO0302-02/mihomo-routing-rules@release/rules/tiktok_custom.yaml) |
 | 加密货币 | `crypto_custom` | 68 | `Crypto` | [Raw](https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/release/rules/crypto_custom.yaml) | [CDN](https://cdn.jsdelivr.net/gh/MOMO0302-02/mihomo-routing-rules@release/rules/crypto_custom.yaml) |
