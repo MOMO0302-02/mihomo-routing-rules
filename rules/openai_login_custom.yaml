@@ -5,7 +5,6 @@ payload:
   - "DOMAIN,auth0.openai.com"
   - "DOMAIN,android.chat.openai.com"
   - "DOMAIN,ios.chat.openai.com"
-  - "DOMAIN,desktop.chat.openai.com"
   - "DOMAIN,cdn.openaimerge.com"
   - "DOMAIN-SUFFIX,ct.sendgrid.net"
   - "DOMAIN-SUFFIX,auth0.com"

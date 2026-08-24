@@ -1,5 +1,17 @@
 # Changelog
 
+## v2026.08.24.6GoogleAITK
+
+### Rules
+
+- 月检工作流首跑（[#1](https://github.com/MOMO0302-02/mihomo-routing-rules/issues/1)）在干净网络环境下抓到 2 个死域，双端 DoH 复核确认后移除：`desktop.chat.openai.com`（OpenAI 已弃用）与 `models.inference.ai.azure.com`（GitHub Models 旧端点）。后者属迁移而非消失，补收新端点 `models.github.ai`（DoH 验活）。总量 929 → 928。
+
+### Automation
+
+- `probe_migration.py` 支持已甄别名单 `tools/probe_known.txt`（按「来源域+目标可注册域」成对匹配）：8 组已人工判定为营销页跳转的条目不再触发月报；同一来源日后跳向新目标时因指纹不同仍会重新报告。实测全库探测 flagged 归零。
+
+## v2026.08.24.5GoogleAITK
+
 ## v2026.08.24.5GoogleAITK
 
 ### Rules

@@ -25,6 +25,22 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 TWO_LEVEL = {"com.cn", "net.cn", "org.cn", "gov.cn", "co.uk", "com.hk", "com.tw", "co.jp"}
+KNOWN_PATH = ROOT / "tools" / "probe_known.txt"
+
+
+def load_known() -> set[tuple[str, str]]:
+    """(source domain, target registrable domain) pairs already triaged."""
+    if not KNOWN_PATH.exists():
+        return set()
+    pairs = set()
+    for line in KNOWN_PATH.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if not line or line.startswith("#"):
+            continue
+        parts = line.split()
+        if len(parts) == 2:
+            pairs.add((parts[0], parts[1]))
+    return pairs
 
 
 class NoRedirect(urllib.request.HTTPRedirectHandler):
@@ -113,7 +129,8 @@ def main() -> int:
             zip(domains, pool.map(lambda d: probe(d, args.proxy or None), domains))
         )
 
-    healthy, flagged = [], []
+    known_pairs = load_known()
+    healthy, flagged, known = [], [], []
     for domain, (code, location) in sorted(results.items()):
         if not location:
             continue
@@ -125,7 +142,11 @@ def main() -> int:
         source_policy = order.get(source_category, "?")
         target_category = first_match(target, payloads)
         if target_category is None:
-            flagged.append(f"[未覆盖] {domain} [{source_category}/{source_policy}] -> {target}")
+            line = f"[未覆盖] {domain} [{source_category}/{source_policy}] -> {target}"
+            if (domain, registrable(target)) in known_pairs:
+                known.append(line)
+            else:
+                flagged.append(line)
         elif order.get(target_category) != source_policy:
             flagged.append(
                 f"[换策略组] {domain} [{source_category}/{source_policy}] -> "
@@ -135,10 +156,15 @@ def main() -> int:
             healthy.append(f"{domain} -> {target} [{target_category}]")
 
     print(f"probed {len(domains)} domains; cross-site redirects: "
-          f"{len(healthy) + len(flagged)} ({len(flagged)} flagged)")
+          f"{len(healthy) + len(flagged) + len(known)} "
+          f"({len(flagged)} flagged, {len(known)} known)")
     if flagged:
         print("\n== 需人工甄别（营销页跳转不收，功能域必收）==")
         for line in flagged:
+            print(f"  {line}")
+    if known:
+        print("\n== 已甄别（tools/probe_known.txt 在案，不再触发月报）==")
+        for line in known:
             print(f"  {line}")
     if healthy:
         print("\n== 健康跳转（新旧域名均已覆盖且同策略）==")

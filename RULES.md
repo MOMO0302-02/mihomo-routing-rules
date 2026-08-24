@@ -1,13 +1,13 @@
 # 规则索引
 
-当前公开版本：`v2026.08.24.5GoogleAITK`，共 23 个分类、929 条 classical 规则。
+当前公开版本：`v2026.08.24.6GoogleAITK`，共 23 个分类、928 条 classical 规则。
 
 配置中的策略名只是建议值，必须替换成你现有配置里真实存在的策略组。直连分类建议保持 `DIRECT`；其余分类可按自己的节点和地区需求映射。
 
 | 分类 | Provider 名称 | 规则数 | 建议策略 | GitHub Raw | jsDelivr |
 |---|---|---:|---|---|---|
 | 时间同步直连 | `ntp_direct_custom` | 16 | `DIRECT` | [Raw](https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/release/rules/ntp_direct_custom.yaml) | [CDN](https://cdn.jsdelivr.net/gh/MOMO0302-02/mihomo-routing-rules@release/rules/ntp_direct_custom.yaml) |
-| OpenAI 登录 | `openai_login_custom` | 29 | `AI` | [Raw](https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/release/rules/openai_login_custom.yaml) | [CDN](https://cdn.jsdelivr.net/gh/MOMO0302-02/mihomo-routing-rules@release/rules/openai_login_custom.yaml) |
+| OpenAI 登录 | `openai_login_custom` | 28 | `AI` | [Raw](https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/release/rules/openai_login_custom.yaml) | [CDN](https://cdn.jsdelivr.net/gh/MOMO0302-02/mihomo-routing-rules@release/rules/openai_login_custom.yaml) |
 | 抖音直连 | `douyin_direct_custom` | 33 | `DIRECT` | [Raw](https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/release/rules/douyin_direct_custom.yaml) | [CDN](https://cdn.jsdelivr.net/gh/MOMO0302-02/mihomo-routing-rules@release/rules/douyin_direct_custom.yaml) |
 | 腾讯服务直连（含腾讯云，见下） | `tencent_docs_direct_custom` | 12 | `DIRECT` | [Raw](https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/release/rules/tencent_docs_direct_custom.yaml) | [CDN](https://cdn.jsdelivr.net/gh/MOMO0302-02/mihomo-routing-rules@release/rules/tencent_docs_direct_custom.yaml) |
 | YouTube | `youtube_custom` | 8 | `Streaming` | [Raw](https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/release/rules/youtube_custom.yaml) | [CDN](https://cdn.jsdelivr.net/gh/MOMO0302-02/mihomo-routing-rules@release/rules/youtube_custom.yaml) |

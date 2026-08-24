@@ -1,0 +1,13 @@
+# 迁移探测中已人工甄别过的跨站跳转（来源域 目标可注册域，空格分隔）。
+# 这些跳转的目标是营销页/母公司官网/占位页，按判据不收录（功能链已由其他域覆盖）。
+# 匹配按「来源+目标」成对进行：同一来源日后若跳向新的目标，仍会重新出现在待甄别列表。
+# probe_migration.py 会把命中的与新发现分开列出，月检 Issue 只因真正的新发现而触发。
+
+ai-gateway.vercel.sh vercel.com
+aka.ms azurestaticapps.net
+disneystreaming.com disney.com
+grazie.ai jetbrains.com
+jetbrains.ai jetbrains.com
+microsoftstore.com microsoft.com
+office365.com microsoft.com
+segment.com twilio.com
