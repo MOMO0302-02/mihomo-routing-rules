@@ -1,0 +1,73 @@
+name: Monthly health check
+
+on:
+  schedule:
+    - cron: "0 2 1 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  health:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Migration probe (cross-site redirects)
+        run: python tools/probe_migration.py --proxy "" | tee probe.txt
+
+      - name: Liveness check (DoH with controls)
+        run: |
+          python - <<'PY' > domains.txt
+          import json
+          from pathlib import Path
+          domains = sorted({
+              json.loads(line[4:]).partition(",")[2]
+              for path in Path("rules").glob("*.yaml")
+              for line in path.read_text(encoding="utf-8").splitlines()[1:]
+              if line.strip() and json.loads(line[4:]).partition(",")[0] in ("DOMAIN", "DOMAIN-SUFFIX")
+          })
+          print("\n".join(domains))
+          PY
+          python tools/check_liveness.py --stdin < domains.txt | tee liveness.txt || true
+
+      - name: Official geosite gap report
+        run: python tools/geosite_gap.py | tee gap.txt || true
+
+      - name: File an issue when anything needs triage
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          flagged=0
+          grep -q "需人工甄别" probe.txt && flagged=1
+          grep -q "^NXDOMAIN" liveness.txt && flagged=1
+          tail -1 gap.txt | grep -qv "TOTAL uncovered: 0" && flagged=1
+          if [ "$flagged" = "0" ]; then
+            echo "all clean - no issue filed"
+            exit 0
+          fi
+          {
+            echo "自动月检发现以下需要人工甄别的事项（营销页跳转不收，功能域必收；主域无 A 记录不等于死域）。"
+            echo
+            echo "## 跨站跳转（迁移嫌疑）"
+            echo '```'
+            sed -n '/需人工甄别/,/^$/p' probe.txt
+            echo '```'
+            echo "## 疑似死域（NXDOMAIN，需按纪律人工复核）"
+            echo '```'
+            grep "^NXDOMAIN" liveness.txt || echo "(无)"
+            echo '```'
+            echo "## 官方 geosite AI 名单中本库未覆盖的条目"
+            echo '```'
+            tail -40 gap.txt
+            echo '```'
+          } > body.md
+          gh issue create \
+            --repo "$GITHUB_REPOSITORY" \
+            --title "月度体检报告 $(date -u +%Y-%m)" \
+            --body-file body.md

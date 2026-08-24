@@ -1,5 +1,17 @@
 # Changelog
 
+## v2026.08.24.5GoogleAITK
+
+### Rules
+
+- `ai_custom` 补收 3 条（246，总量 929）：`ppl-ai-file-upload.s3.amazonaws.com` 与 `pplx-res.cloudinary.com`（Perplexity 的文件上传桶与静态资源——主站早已收录而上传链路缺失，属「同链路必须同出口」缺口）、`clawhub.ai`（OpenClaw 技能市场，`openclaw.ai`/`claw.cloud` 均已在库）。三条均 DoH 验活。
+- 官方名单中的 `comfyci.org` 经 DoH 判定 **NXDOMAIN（死域）**，不予收录——官方 geosite 同样会携带过期条目，引用前必须逐条验活。
+
+### Automation
+
+- 新增**每月自动体检**工作流（`monthly-health.yml`，每月 1 号）：在 GitHub 服务器上跑全库迁移探测 + DoH 死域检测 + 官方名单差距报告，发现需人工甄别的事项自动开 Issue；全干净则静默。
+- `geosite_gap.py` 入库：拉取官方 MetaCubeX geosite 名单与本库比对，输出未覆盖条目。配套 `tools/geosite_rejected.txt`（已否决名单，22 条，含否决理由）——被人工甄别剔除的条目不再重复出现在月报中，移出该文件即恢复报告。当前对官方 `category-ai-!cn` 的差距为 **0**。
+
 ## v2026.08.24.4GoogleAITK
 
 ### New category

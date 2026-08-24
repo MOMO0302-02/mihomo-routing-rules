@@ -1,0 +1,39 @@
+# 官方 geosite 名单中经人工甄别后有意不收录的条目。
+# geosite_gap.py 会跳过这里的域名，月检 Issue 只报告真正的新增。
+# 移出本文件即恢复报告。判据见 AGENTS.md（功能域必收，营销/边缘/错分类不收）。
+
+# 通用客服 SaaS（数千无关网站共用，收录会波及所有网站的客服流量）
+liveperson.net
+lpsnmedia.net
+
+# staging/内部域，真实用户不会命中
+copilot-stg.com
+
+# 官网博客/营销页，功能链已由其他域覆盖
+diabrowser.engineering
+openai.qualtrics.com
+
+# 边缘/小众 AI 产品，未见使用需求（要用时移出本清单即可）
+dreamgen.com
+youmind.site
+youmind.com
+youmind.ai
+notegpt.io
+plannotator.ai
+spicywriter.com
+talkai.info
+tapnow.ai
+crixet.com
+oystermercury.top
+
+# 死域（2026-08-24 DoH 判定 NXDOMAIN，官方名单里的过期条目）
+comfyci.org
+
+# 跑错分类：Envato 素材市场不是 AI 服务
+envato.com
+envato-static.com
+envatousercontent.com
+themeforest.net
+
+# VS Code 扩展市场 CDN 子域，扩展安装直连即可，不属登录/功能链
+coderabbit.gallery.vsassets.io
