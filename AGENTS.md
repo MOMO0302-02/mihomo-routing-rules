@@ -2,7 +2,7 @@
 项目: Mihomo Routing Rules
 维护方: Codex
 真相源: 本文件 + manifest.json + Git
-最后校准: 2026-08-17
+最后校准: 2026-08-24
 状态源: git
 状态源路径: F:\AI\Github分流规则
 ---
@@ -15,6 +15,14 @@
 
 ## 当前状态
 
+- 2026-08-24 第二轮参照比对覆盖了此前没动过的四个分类，再补 67 条。**最大的一处真空是微软**：原 `microsoft_custom` 只有 4 条（Xbox + `live.com` + `msedge.net`），OneDrive / SharePoint / Office 一条没有；并发现 `office.com` 已 302 至 **`cloud.microsoft`**（微软新启用的统一应用域），此前无任何规则命中。另有三处新迁移：`notion.so`/`notion.site`→`notion.com`、`zoom.us`→`zoom.com`、`skype.com`→`teams.live.com`（后者已被 `live.com` 覆盖，故 `skype.com` 未收）。
+- 2026-08-24 内核验证已用**官方 Mihomo Meta v1.19.30** 重做：848 条 + 22 provider + 推荐顺序，0 错误 0 警告；并做了负对照（注入 `NOT-A-RULE-TYPE` 内核如实报 `parse classical rule ... error`）。内核程序下载后放在 `temp/coretest/`（temp 不入库），下次可直接复用；`temp/gap_vs_ref.py` 是本轮的参照比对脚本，`temp/ref/` 是参照集快照。
+- 2026-08-24 刻意未扩国内直连类：参照集 ChinaMax 数千条，而本库这几类是精挑的百余条，国内域名在绝大多数配置里由 `GEOSITE,cn` 或兜底直连接住，堆进来只膨胀不改行为。
+- 公开规则版本：`v2026.08.24.1GoogleAITK`（22 类、848 条）。2026-08-24 首次以**高星社区规则集**为参照做覆盖率比对（blackmatrix7/ios_rule_script 33 个分类文件），补收 75 条。方法沉淀：把参照集每个域名放进本库完整匹配语义里判定是否命中，只看一条都命中不到的；**参照集噪音远大于信号**——Visa/Disney/YouTube 各有上百个国别域名全部 301 回主域，Disney 参照集 172 条里 162 条本库未命中而绝大多数是乐园/招聘/演出营销站，加密货币参照集含 FTX/Bittrex 等已倒闭交易所。可直接照搬的比例不到一成，必须逐条甄别。
+- 2026-08-24 本轮补收的三处**真空**（此前完全没有任何规则覆盖，不是冗余问题）：①支付分类没有 Visa/Mastercard/American Express 三大卡组织；②流媒体只收了各家主域，Netflix/Disney+/Hulu/Prime Video/Spotify 的 CDN 承载域全缺；③`npmjs.org`（npm 实际下载端点，归 GitHub）。这类真空靠「跳转探测」发现不了——跳转探测只能找出已收录域名的迁移，找不出**从未收录过**的域。两种方法互补，下次大版本前应各跑一遍。
+- 2026-08-24 判据补充（分类归属看「谁在用」而不只看「谁拥有」）：`bytedapm.com`、`ipstatp.com` 虽在参照集的 TikTok 分类里，但属字节国内外共用的监控/图床基础设施，收进 `tiktok_custom` 会把抖音流量推上代理，与 `douyin_direct_custom` 直连意图冲突，**刻意未收**；同理 `hbogo.com`/`hbonow.com` 品牌已并入 Max、只剩跳转，不在功能链路上，也未收。
+- 2026-08-24 同步方向已反转，**上游不再是规则来源**：订阅工作台 2026-08-24 完成「规则集化」，面板产物直接引用本库 `release` 分支的 22 个 rule-provider（`config/panel_rule_map.yaml` 里 `base_url` 走 jsdelivr，备用 raw.githubusercontent；实测客户端加载 706 条，与本库逐条一致）。工作台的 `custom_rules.yaml` 停留在 2026-08-16，比本库旧一整轮——它与本库的 84 条差异**全部**是本库 8-17 主动清掉的冗余/失效条目（24 条经三解析器判死的错拼域已在 `CHANGELOG.md` 列明），11 条反向差异是本库 8-17 新增的迁移域。**结论：此后不要再从 `custom_rules.yaml` 往本库回灌，那等于回退；该文件应视为归档。**
+- 2026-08-24 顺带核对了 VPS 管控台（`F:\AI\VPS管控台`）那套 GEOSITE 通用规则里的 3 条「救回规则」是否已被本库覆盖：`tiktokrow-cdn.com` 被 `tiktok_custom` 的 `DOMAIN-KEYWORD,tiktok` 命中、`minimax.io` 已在 `ai_api_direct_custom`，两条无需动作；**`qoder.com` 本库无任何规则覆盖**（阿里面向国际的 AI 编程工具，GEOSITE 把它归进 `cn` 导致直连）——按「面向国际即收进 `ai_custom`」的既有判据应当收录，待用户确认后随下一版发布。
 - 2026-08-17 全项检查补查三维度：①全 Git 历史扫描——11 个提交均无私有规则文件、无代理 URI/订阅链接；②真实内核加载——官方 Mihomo Meta v1.19.29 加载全部 22 provider + 696 条 + 推荐顺序，0 错误（方法见「怎么验证」，`-t` 不够）；③GitHub Releases 页面曾过期（Latest 停在 `v2026.07.28.2GoogleAITK`），**2026-08-17 经用户全权授权已修复**：为 `v2026.08.17.3GoogleAITK` 创建了带累计变更说明的 Release 并标记 Latest（API 确认生效）。凭据方法：Git Credential Manager 存的推送凭据可经 `git credential fill` 取出用于 GitHub API（本次实测 rate_limit 200、创建 Release 201）；仅在用户明确授权公开动作时才可这样用。发版纪律：**打 tag 后应同时建 Release**，否则仓库首页的 Latest 会误导访客。尚未做过的检查：全库 ~650 个存量域名的跳转迁移探测（8-16 只测了新增 68 条）；仓库设置层（分支保护等）需账号权限。
 - 公开规则版本：`v2026.08.17.4GoogleAITK`（22 类、706 条）。2026-08-17 全库 662 域名首次迁移探测，补收 10 条真实迁移（Intercom/Runway/Phantom 迁 .com、Google Pay→Wallet、Web3Modal→Reown、`cloud.tencent.com` 等）；`validate_rules.py` 固化三道语义门禁（后缀盖后缀、关键词盖关键词、跨策略遮蔽），CI 从此能抓住 8-17 手工发现的全部三类问题，负对照已验证。甄别纪律：**跳转目标是否收录，看它是功能域还是营销页**——官网/母公司/文档页跳转（vercel.com、twilio.com、www.microsoft.com）不收，功能链路上的新域（vscode.dev、wallet.google.com）必收。
 - 2026-08-17 探测方法沉淀：全库迁移探测 = 每个 DOMAIN/DOMAIN-SUFFIX 目标发一次 HEAD（DIRECT 分类直连、其余走代理），只看**跨可注册域**的跳转（same-site 的 www./路径跳转是噪音）；再对跳转目标查「是否被任何规则覆盖 + 策略组是否一致」，两问都过才算健康。60 个跨站跳转里真问题只有 16 个、值得收的只有 10 个——多数跳转是新旧域名均已收录的正常态。建议每次大版本前跑一遍（脚本模式已记于本条，temp/ 不入库）。2026-08-17 冗余审查后无损移除 79 条（53 条被同分类更宽后缀覆盖 + 26 条域名已失效），匹配行为不变，细节见 `CHANGELOG.md`。**与上游差异扩大，同步时需以本库为准整体回灌，不能逐条比对。**

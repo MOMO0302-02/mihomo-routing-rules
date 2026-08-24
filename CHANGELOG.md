@@ -1,5 +1,32 @@
 # Changelog
 
+## v2026.08.24.1GoogleAITK
+
+### Rules
+
+- 以**高星社区规则集**（blackmatrix7/ios_rule_script 的 33 个分类规则文件）为参照做覆盖率比对，补收 **75 条**（706 → 781），分类保持 22 个。比对方法：把参照集里的每个域名放进本库的完整匹配语义（后缀/精确/关键词）里判定「本库是否命中」，只看**一条都命中不到**的域名；对命中不到的再逐条甄别是否值得收录。
+- 参照集的噪音远大于信号，**刻意不收**的大类已记录在案：Visa/Disney/YouTube 的上百个国别域名（`visa.com.br`、`disney.fr`、`youtube.co.uk` 等，全部 301 回主域，且本库收主域已够）、Disney 的乐园/招聘/演出等营销站、加密货币参照集里已倒闭的交易所（FTX、Bittrex、Bibox）与资讯站，以及 `identrust.com`、`onetrust.com`、`cookielaw.org`、`algolia.net` 这类被成千上万网站共用的通用第三方服务。
+- **综合 AI +18**（163 → 181）：`qoder.com`（阿里国际版 AI 编程工具，`geosite:cn` 会把它误判为国内而直连）、`trae.ai` 与 `marscode.com`（字节 Trae，实测 `marscode.com` 已改版为 Trae 站点）、`deepmind.com`（301 → 已收录的 `deepmind.google`，第一跳此前无规则）、`generativeai.google` 与 `ai.google`（`.google` gTLD，前者 302 → 后者，两侧此前均无覆盖）、`ai.com`、`ollama.com`、`lmstudio.ai`、`wandb.ai`、`langchain.com`、`llamaindex.ai`、`blackforestlabs.ai` 与 `bfl.ai`（前者 301 → 后者）、`recraft.ai`、`assemblyai.com`、`deepgram.com`、`colab.research.google.com`。
+- **加密货币 +29**（39 → 68）：交易所 `bitfinex.com`、`bitstamp.net`、`gemini.com`、`bithumb.com`、`upbit.com`、`backpack.exchange`、`hyperliquid.xyz`；钱包与硬件 `ledger.com`、`trezor.io`、`rabby.io`、`safe.global`、`exodus.com`；链上数据 `blockchain.com`、`bscscan.com`、`debank.com`、`defillama.com`、`dune.com`；公链与 DeFi `arbitrum.io`、`solana.com`、`aave.com`、`lido.fi`、`jup.ag`、`curve.fi` 与 `curve.finance`（前者 302 → 后者）、`1inch.io` 与 `1inch.com`（前者 301 → 后者）；NFT `opensea.io`、`blur.io`、`magiceden.io`。
+- **流媒体 +14**（17 → 31）：Netflix `netflix.net`、`nflxsearch.net`、`nflximg.com`、`fast.com`；Disney+ `bamgrid.com`、`disneystreaming.com`、`dssedge.com`；Hulu `hulustream.com`、`huluim.com`；Prime Video `aiv-cdn.net`、`aiv-delivery.net`、`pv-cdn.net`；Spotify `spotifycdn.com`、`spotifycdn.net`。这 14 条里有 12 条主域不响应 HTTP——按本库既有判据（见 `v2026.08.17.2GoogleAITK`「不可据主域不解析判定失效」）改查 NS，全部托管在 AWS Route 53 / NS1 / Akamai 上，是正常的 CDN 通配域。
+- **支付 +10**（16 → 26）：`visa.com`、`mastercard.com`、`americanexpress.com` 三大卡组织此前**完全没有覆盖**；另补 `revolut.com`、`skrill.com`、`squareup.com`、`adyen.com`、`paddle.com`、`lemonsqueezy.com`、`remitly.com`。
+- **GitHub +2**（13 → 15）：`npmjs.com` 与 `npmjs.org`（npm 归 GitHub，`registry.npmjs.org` 是实际的包下载端点）。
+- **TikTok +2**（43 → 45）：`ttwebview.com`、`sgpstatp.com`。同批参照集里的 `bytedapm.com` 与 `ipstatp.com` **刻意未收**——这两个是字节国内外共用的监控与图床基础设施，收进 TikTok 分类会把抖音/今日头条的流量一并推上代理，与 `douyin_direct_custom` 的直连意图冲突。
+- 已收录的 `hbogo.com` / `hbonow.com` 候选被剔除：HBO Go 与 HBO Now 两个品牌均已并入 Max，域名仅剩跳转，功能链路上不再出现。
+- 第二轮把参照比对扩到此前没动过的四个分类，再补 **67 条**（781 → 848）：
+  - **微软 4 → 22**：原分类只有 Xbox 与 `live.com`、`msedge.net` 四条，**OneDrive / SharePoint / Office 全无覆盖**。补 `onedrive.com`、`1drv.com`、`1drv.ms`、`livefilestore.com`、`microsoftpersonalcontent.com`、`oneclient.sfx.ms`、`sharepoint.com`、`sharepointonline.com`、`office.com`、`office.net`、`office365.com`、`outlook.com`、`microsoftonline.com`、`msauth.net`、`msftauth.net`、`msidentity.com`、`aka.ms`，以及 **`cloud.microsoft`**——实测 `office.com` 已 302 至 `m365.cloud.microsoft`，这是微软新启用的统一应用域，此前无任何规则命中。`skype.com` 候选剔除：Skype 已并入 Teams，跳转目标 `teams.live.com` 本就被 `live.com` 覆盖。
+  - **境外常用 28 → 63**：补 Reddit（4）、LinkedIn（2）、Pinterest（2）、Quora（2）、Snapchat（2）、Slack（2）、Notion（3，`notion.so` / `notion.site` 均 301 至新主域 `notion.com`）、Dropbox（2）、Zoom（2，`zoom.us` 301 至 `zoom.com`）、SoundCloud（2）、Stack Overflow（2）、Wikipedia / Wikimedia、Medium、Tumblr、Signal、Figma、Imgur、Vimeo、DuckDuckGo、LINE。
+  - **流媒体 31 → 39**：Twitch（`twitch.tv`、`ttvnw.net`、`jtvnw.net`）、Crunchyroll、Paramount+、Peacock、DAZN、Apple TV+（`tv.apple.com`）。
+  - **Adobe 49 → 55**：`creativecloud.com`、`creativesdk.com`、`echosign.com`、`adobesign.com`、`2o7.net`（NS 实为 `ns201.adobe.net`，与库内既有的 `demdex.net` / `omtrdc.net` 同属 Adobe 分析域）、`macromedia.com`。
+- **国内直连类（`mobile_cn_custom` 等）本轮刻意未扩**：参照集的 ChinaMax 有数千条，而本库这几个分类是精挑的百余条；国内域名在绝大多数配置里本就由 `GEOSITE,cn` 或兜底直连接住，逐条堆进来只会让文件膨胀而不改变行为。
+
+### Verification
+
+- 全部 848 条经**官方核心 Mihomo Meta v1.19.30** 实际加载验证（22 个 file 类型 provider + 推荐顺序，`log-level: info`）：**0 错误 0 警告**。
+- 同时做了**负对照**：向 `payment_custom` 注入一条 `NOT-A-RULE-TYPE,broken.example`，内核如实报 `parse classical rule ... error: unsupported rule type`，确认该验证确实能发现问题；随后已还原。
+
+- 全部 75 条均经代理侧 HTTP 探测或 NS 记录双重确认存活；三道语义门禁（后缀盖后缀、关键词盖关键词、跨策略遮蔽）在补收后仍为 0 告警。
+
 ## v2026.08.17.4GoogleAITK
 
 ### Rules
