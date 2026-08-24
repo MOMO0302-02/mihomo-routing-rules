@@ -1,5 +1,16 @@
 # Changelog
 
+## v2026.08.24.2GoogleAITK
+
+### Fixes
+
+- 修 `v2026.08.24.1GoogleAITK` 的 `manifest.json`：其中 9 个规则文件的 SHA-256 是在 **CRLF 换行**的本地工作副本上算的，而 Git 按 `.gitattributes` 统一存成 LF，导致按 manifest 校验线上文件必然对不上（本地验证器通过、CI 报 9 条 `manifest SHA-256 mismatch`）。**规则内容本身没有任何问题**，受影响的只是校验值字段。本版已把全部文件归一为 LF 并重算。
+- `validate_rules.py` 新增一道门禁：规则文件出现 CRLF 直接报错。这类问题在 Windows 上写文件时静默产生，本地和 CI 会给出相反结论——固化成门禁后本地就能拦下。已负对照验证（注入 CRLF 报错、还原后通过）。
+
+### Rules
+
+- 规则内容与 `v2026.08.24.1GoogleAITK` 完全一致：22 个分类、848 条。
+
 ## v2026.08.24.1GoogleAITK
 
 ### Rules

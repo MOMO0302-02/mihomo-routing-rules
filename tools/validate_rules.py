@@ -46,6 +46,9 @@ SENSITIVE_PATTERNS = {
 }
 
 
+CRLF = bytes((13, 10))  # b'\r\n'
+
+
 def sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
@@ -149,6 +152,10 @@ def main() -> int:
             errors.append(f"{filename}: manifest count mismatch")
         if entry.get("sha256") != sha256(path):
             errors.append(f"{filename}: manifest SHA-256 mismatch")
+        # CRLF would make the manifest SHA-256 recorded on Windows disagree with the
+        # LF bytes Git actually stores, so CI fails while the local run passes.
+        if CRLF in path.read_bytes():
+            errors.append(f"{filename}: CRLF line endings (rule files must be LF)")
         text = path.read_text(encoding="utf-8")
         for label, pattern in SENSITIVE_PATTERNS.items():
             if pattern.search(text):

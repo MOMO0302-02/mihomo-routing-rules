@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "rule_version": "v2026.08.24.1GoogleAITK",
+  "rule_version": "v2026.08.24.2GoogleAITK",
   "generated_on": "2026-08-24",
   "public_categories": 22,
   "total_rules": 848,
@@ -36,27 +36,27 @@
     },
     "ai_custom.yaml": {
       "count": 181,
-      "sha256": "c81498d506bcd21b975d2b85f71f46ce938b856f7a064c86720eb60ad8f7691f"
+      "sha256": "9792670cd57287650911dd2e352c029fb862979ad45fece83c89b37b343c8b6e"
     },
     "github_custom.yaml": {
       "count": 15,
-      "sha256": "7dbadfda317c884f3502fa106f12261db0dfd55e796032eda8551560682a0e38"
+      "sha256": "c905946b771fd8435e30e37762e0f0ec8e32ca638f0dfd5362aa9e7e92dac605"
     },
     "tiktok_custom.yaml": {
       "count": 45,
-      "sha256": "89e943d07b87a0a128b1b76e2fd9ada7defcc7692781d2b3d1db0fb6e2d6bbba"
+      "sha256": "8dc05faa494b78e7a1e8c2c8f36dcdef4be6c4451a4f7f49a08cc6751b4c6682"
     },
     "crypto_custom.yaml": {
       "count": 68,
-      "sha256": "2c2fedc215e3f6bf8e987915860ad33ee3c5c8ad3a8620dbb2170ebc75c819af"
+      "sha256": "0a6da0ae4a7122ed510c43116108c536018c77531a8c8d51a9eb91c0f7527c90"
     },
     "payment_custom.yaml": {
       "count": 26,
-      "sha256": "15e692d212fbc473c58a7e860135ecdd5fd1d31192d648c656cd551e1c1c5f9a"
+      "sha256": "a3614385f50df0b6eb14b0b2f427b538de99ecb2240e39bd3ccac10a76d80c55"
     },
     "streaming_custom.yaml": {
       "count": 39,
-      "sha256": "c08e6728f7be4730011cdef03542c9fa7915dd59abc77191697edf46c479b3e6"
+      "sha256": "0b929128604a42327107399e0befaf713d502871c84a7d31637dc3433ccd2925"
     },
     "microsoft_store_custom.yaml": {
       "count": 22,
@@ -72,7 +72,7 @@
     },
     "microsoft_custom.yaml": {
       "count": 22,
-      "sha256": "51609c502fd7c2b3076cad916361035106f834a92143ca6eacfc5d760c1c05d3"
+      "sha256": "9659a2037617711c348ad11a73e2b89f6fb3d25682ef7306c808a6838d54b4c3"
     },
     "adobe_download_direct_custom.yaml": {
       "count": 6,
@@ -80,7 +80,7 @@
     },
     "adobe_custom.yaml": {
       "count": 55,
-      "sha256": "78ec338664b32fc887c4464122ed9fc83e31dc58b3bfcfff400f6d0b588810f8"
+      "sha256": "c52c568d9035b0dd25b33020299df9a7fa833d6852bbce8e3ac1bd4a7497e389"
     },
     "mobile_cn_custom.yaml": {
       "count": 99,
@@ -92,7 +92,7 @@
     },
     "mobile_overseas_custom.yaml": {
       "count": 63,
-      "sha256": "8ccf68697e71156c18c433499bd42089759571eedf458b64668bd635746ac0cf"
+      "sha256": "20b2c0b515fcd2c43d2b9e1ef9f801c5d431edcc94605601e730117fb2f38d94"
     },
     "youtube_custom.yaml": {
       "count": 8,
