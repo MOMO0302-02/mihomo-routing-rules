@@ -32,6 +32,8 @@ payload:
   - "PROCESS-NAME,codex.exe"
   - "PROCESS-NAME,ChatGPT.exe"
   - "PROCESS-NAME,OpenAI.exe"
+  - "PROCESS-NAME,Claude.exe"
+  - "PROCESS-NAME,claude.exe"
   - "DOMAIN-SUFFIX,featuregates.org"
   - "DOMAIN-SUFFIX,statsig.com"
   - "DOMAIN-SUFFIX,statsigapi.net"

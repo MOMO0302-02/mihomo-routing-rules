@@ -1,5 +1,11 @@
 # Changelog
 
+## v2026.08.25.3GoogleAITK
+
+### Rules
+
+- `ai_custom` 新增 `PROCESS-NAME,Claude.exe` 与 `PROCESS-NAME,claude.exe`（247 → 249，总量 932）：Claude Code CLI 与 Claude 桌面版的进程级兜底，沿用库内 `Codex.exe`/`codex.exe` 大小写双写先例。进程规则的价值是**在域名尚未被收录时就把该进程的全部流量兜进 AI 组**——本周两次 Datadog 遥测域漏网（browser-intake 族、logs 族）正是这类问题：域名会不断冒新，进程不会。实测本机 `claude.exe` 进程在跑而库内此前无任何 Claude 进程规则（ChatGPT/Codex/Adobe 均有）。
+
 ## v2026.08.25.2GoogleAITK
 
 ### Fixes
