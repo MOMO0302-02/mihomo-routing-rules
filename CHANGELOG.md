@@ -1,5 +1,15 @@
 # Changelog
 
+## v2026.08.25.2GoogleAITK
+
+### Fixes
+
+- `ai_custom` 新增 `DOMAIN-SUFFIX,datadoghq.com`（246 → 247，总量 930）：实时监控工具首跑 60 秒即抓到 `http-intake.logs.us5.datadoghq.com` 落兜底——Datadog 的**日志**上报族与已修的 browser-intake（浏览器遥测）是两条独立链路，且它是 `datadoghq.com` 的真子域，收主域后缀一条管住所有区域的 logs/rum 子域，与库内 `sentry.io` 全域收录先例一致。DoH 验活。`browser-intake` 关键词保留（负责 datadoghq.com 之外的兄弟注册域形态）。
+
+### Tooling
+
+- `watch_fallback.py` 支持 **Windows 命名管道自动发现**：Clash Party / Mihomo Party 不开 TCP 外部控制器、改用命名管道驱动内核，本工具现可直接发现并接入该管道（HTTP over named pipe，支持 chunked 解码），**零设置开箱即用**；TCP 控制器路径保留（`--controller`/`--secret`，`--no-pipe` 可禁用管道发现）。实测 60 秒采样即产出三类分级报告（未覆盖候选 / 已覆盖但配置未引用 / 兜底干净）。
+
 ## v2026.08.25.1GoogleAITK
 
 ### Fixes

@@ -8,19 +8,22 @@ that eye: it polls the core's external controller, aggregates fallback
 hosts, then checks each against this repository's rules and prints the ones
 no rule would catch - ready-made triage candidates.
 
-Requires the client to expose the external controller (Clash Party:
-设置 -> 外部控制, default http://127.0.0.1:9090).
+Works out of the box with Clash Party / Mihomo Party on Windows: those
+clients drive the core over a named pipe instead of a TCP controller, and
+this tool auto-discovers that pipe (no settings change needed). A TCP
+external controller (--controller http://127.0.0.1:9090 [--secret xxx])
+works too, for clients that expose one.
 
 Usage:
   python tools/watch_fallback.py                          # watch until Ctrl+C
   python tools/watch_fallback.py --duration 300           # watch 5 minutes
-  python tools/watch_fallback.py --controller http://127.0.0.1:9090 --secret xxx
 """
 from __future__ import annotations
 
 import argparse
 import collections
 import json
+import os
 import re
 import time
 import urllib.request
@@ -28,6 +31,49 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 FALLBACK_RULES = {"Match", "MATCH"}
+PIPE_DIR = "//./pipe/"
+
+
+def discover_pipe() -> str | None:
+    """Find the Mihomo Party admin pipe (Windows only; name carries a PID)."""
+    try:
+        names = os.listdir(PIPE_DIR)
+    except OSError:
+        return None
+    for name in names:
+        if "mihomo-admin" in name:
+            return PIPE_DIR + name.replace("\\", "/")
+    return None
+
+
+def http_over_pipe(pipe_path: str, request_path: str) -> bytes:
+    """One HTTP/1.1 request over a named pipe; returns the body bytes."""
+    with open(pipe_path, "r+b", buffering=0) as pipe:
+        pipe.write(
+            f"GET {request_path} HTTP/1.1\r\nHost: mihomo\r\n"
+            "Connection: close\r\n\r\n".encode("ascii")
+        )
+        raw = b""
+        try:
+            while True:
+                chunk = pipe.read(65536)
+                if not chunk:
+                    break
+                raw += chunk
+        except OSError:
+            pass  # server closing its end reads as an error on some systems
+    header, _, body = raw.partition(b"\r\n\r\n")
+    if b"chunked" in header.lower():
+        decoded = b""
+        while body:
+            size_line, _, body = body.partition(b"\r\n")
+            size = int(size_line.split(b";")[0], 16)
+            if size == 0:
+                break
+            decoded += body[:size]
+            body = body[size + 2:]
+        return decoded
+    return body
 
 
 def load_rules() -> dict[str, list[str]]:
@@ -54,7 +100,10 @@ def first_match(host: str, payloads: dict[str, list[str]]) -> str | None:
     return None
 
 
-def fetch_connections(controller: str, secret: str | None) -> list[dict]:
+def fetch_connections(controller: str, secret: str | None, pipe: str | None) -> list[dict]:
+    if pipe:
+        body = http_over_pipe(pipe, "/connections")
+        return json.loads(body.decode("utf-8")).get("connections") or []
     request = urllib.request.Request(f"{controller.rstrip('/')}/connections")
     if secret:
         request.add_header("Authorization", f"Bearer {secret}")
@@ -68,20 +117,26 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--controller", default="http://127.0.0.1:9090")
     parser.add_argument("--secret", default=None)
+    parser.add_argument("--no-pipe", action="store_true", help="禁用命名管道自动发现，只用 --controller")
     parser.add_argument("--interval", type=float, default=3.0)
     parser.add_argument("--duration", type=float, default=0, help="秒；0 = 直到 Ctrl+C")
     args = parser.parse_args()
+
+    pipe = None if args.no_pipe else discover_pipe()
+    if pipe:
+        print(f"已发现客户端命名管道，直接接入：{pipe}")
 
     payloads = load_rules()
     fallback_hits: collections.Counter[str] = collections.Counter()
     seen_total: set[str] = set()
     started = time.monotonic()
 
-    print(f"watching {args.controller} 每 {args.interval}s 采样，Ctrl+C 结束并出报告 ...")
+    source = pipe or args.controller
+    print(f"watching {source} 每 {args.interval}s 采样，Ctrl+C 结束并出报告 ...")
     try:
         while True:
             try:
-                for conn in fetch_connections(args.controller, args.secret):
+                for conn in fetch_connections(args.controller, args.secret, pipe):
                     meta = conn.get("metadata") or {}
                     host = (meta.get("host") or "").lower().rstrip(".")
                     if not host or not re.fullmatch(r"[a-z0-9.-]+", host):
