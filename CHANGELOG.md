@@ -1,5 +1,16 @@
 # Changelog
 
+## v2026.08.24.7GoogleAITK
+
+### Fixes
+
+- `ai_custom` 中 `DOMAIN-SUFFIX,browser-intake-datadoghq.com` 改为 `DOMAIN-KEYWORD,browser-intake`（总量保持 928）。Datadog 按区域拆分为**兄弟注册域**（`browser-intake-us5-datadoghq.com` / `us3` / `ap1` …），中缀多了区域标识，后缀匹配全部接不住；实测客户端上 `browser-intake-us5-datadoghq.com` 落到兜底 Match，未进 AI 组。关键词写法经矩阵验证：原域、`rum.` 子域、全部区域变体乃至 `.eu` 顶级域形态均命中，`example.com` 类无误伤。`RULES.md` 关键词表已同步（第七个使用关键词的分类）。
+- `openai_login_custom` 的 `DOMAIN,rum.browser-intake-datadoghq.com` 为刻意精确写法，**保持不动**；其区域变体由 `ai_custom` 的关键词兜住（默认映射同为 AI 组）。
+
+### Tooling
+
+- 新增 `tools/watch_fallback.py`：连接客户端的外部控制接口实时采样连接表，聚合**落到兜底 Match 的主机**并对照本库判断是否已覆盖，输出收录候选清单——把「盯连接面板发现漏网域名」这件事自动化（本次 Datadog 缺口正是靠肉眼盯出来的）。需在客户端开启外部控制。
+
 ## v2026.08.24.6GoogleAITK
 
 ### Rules

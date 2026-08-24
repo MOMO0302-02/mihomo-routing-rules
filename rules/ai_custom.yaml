@@ -39,7 +39,7 @@ payload:
   - "DOMAIN-SUFFIX,arkoselabs.com"
   - "DOMAIN-SUFFIX,funcaptcha.com"
   - "DOMAIN-SUFFIX,challenges.cloudflare.com"
-  - "DOMAIN-SUFFIX,browser-intake-datadoghq.com"
+  - "DOMAIN-KEYWORD,browser-intake"
   - "DOMAIN-SUFFIX,sentry.io"
   - "DOMAIN-SUFFIX,intercom.io"
   - "DOMAIN-SUFFIX,intercomcdn.com"

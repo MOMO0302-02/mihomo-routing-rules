@@ -1,6 +1,6 @@
 # 规则索引
 
-当前公开版本：`v2026.08.24.6GoogleAITK`，共 23 个分类、928 条 classical 规则。
+当前公开版本：`v2026.08.24.7GoogleAITK`，共 23 个分类、928 条 classical 规则。
 
 配置中的策略名只是建议值，必须替换成你现有配置里真实存在的策略组。直连分类建议保持 `DIRECT`；其余分类可按自己的节点和地区需求映射。
 
@@ -52,12 +52,13 @@
 
 Provider 名称保持 `tencent_docs_direct_custom` 不变——改名会让所有已引用它的配置失效。
 
-### 2. 六个分类使用 `DOMAIN-KEYWORD`，按子串匹配
+### 2. 七个分类使用 `DOMAIN-KEYWORD`，按子串匹配
 
 | 分类 | 关键词 |
 |---|---|
 | `adobe_custom` | `adobe` |
 | `ai_api_custom` | `bedrock-runtime` |
+| `ai_custom` | `browser-intake` |
 | `crypto_custom` | `pokepay` |
 | `douyin_direct_custom` | `douyin`、`aweme` |
 | `tencent_docs_direct_custom` | `tencent-doc`、`doc.weixin` |
