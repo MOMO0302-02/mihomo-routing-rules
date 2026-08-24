@@ -1,6 +1,6 @@
 # 规则索引
 
-当前公开版本：`v2026.08.24.7GoogleAITK`，共 23 个分类、928 条 classical 规则。
+当前公开版本：`v2026.08.25.1GoogleAITK`，共 23 个分类、929 条 classical 规则。
 
 配置中的策略名只是建议值，必须替换成你现有配置里真实存在的策略组。直连分类建议保持 `DIRECT`；其余分类可按自己的节点和地区需求映射。
 
@@ -16,7 +16,7 @@
 | AI API | `ai_api_custom` | 42 | `AI` | [Raw](https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/release/rules/ai_api_custom.yaml) | [CDN](https://cdn.jsdelivr.net/gh/MOMO0302-02/mihomo-routing-rules@release/rules/ai_api_custom.yaml) |
 | 综合 AI | `ai_custom` | 246 | `AI` | [Raw](https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/release/rules/ai_custom.yaml) | [CDN](https://cdn.jsdelivr.net/gh/MOMO0302-02/mihomo-routing-rules@release/rules/ai_custom.yaml) |
 | GitHub | `github_custom` | 15 | `GitHub` | [Raw](https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/release/rules/github_custom.yaml) | [CDN](https://cdn.jsdelivr.net/gh/MOMO0302-02/mihomo-routing-rules@release/rules/github_custom.yaml) |
-| TikTok / CapCut | `tiktok_custom` | 45 | `TikTok` | [Raw](https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/release/rules/tiktok_custom.yaml) | [CDN](https://cdn.jsdelivr.net/gh/MOMO0302-02/mihomo-routing-rules@release/rules/tiktok_custom.yaml) |
+| TikTok / CapCut | `tiktok_custom` | 46 | `TikTok` | [Raw](https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/release/rules/tiktok_custom.yaml) | [CDN](https://cdn.jsdelivr.net/gh/MOMO0302-02/mihomo-routing-rules@release/rules/tiktok_custom.yaml) |
 | 加密货币 | `crypto_custom` | 68 | `Crypto` | [Raw](https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/release/rules/crypto_custom.yaml) | [CDN](https://cdn.jsdelivr.net/gh/MOMO0302-02/mihomo-routing-rules@release/rules/crypto_custom.yaml) |
 | 支付 | `payment_custom` | 26 | `Payment` | [Raw](https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/release/rules/payment_custom.yaml) | [CDN](https://cdn.jsdelivr.net/gh/MOMO0302-02/mihomo-routing-rules@release/rules/payment_custom.yaml) |
 | 流媒体 | `streaming_custom` | 39 | `Streaming` | [Raw](https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/release/rules/streaming_custom.yaml) | [CDN](https://cdn.jsdelivr.net/gh/MOMO0302-02/mihomo-routing-rules@release/rules/streaming_custom.yaml) |
@@ -62,7 +62,7 @@ Provider 名称保持 `tencent_docs_direct_custom` 不变——改名会让所�
 | `crypto_custom` | `pokepay` |
 | `douyin_direct_custom` | `douyin`、`aweme` |
 | `tencent_docs_direct_custom` | `tencent-doc`、`doc.weixin` |
-| `tiktok_custom` | `tik-tok`、`tiktok`、`byteoversea`、`byteintlapi` |
+| `tiktok_custom` | `tik-tok`、`tiktok`、`byteoversea`、`byteintlapi`、`capcut` |
 
 `DOMAIN-KEYWORD` 是**子串**匹配：`DOMAIN-KEYWORD,adobe` 会命中任何含 `adobe` 的域名，包括与 Adobe 无关的第三方域名。保留它们是因为这些服务的 CDN 域名数量多且经常变动，逐条穷举会漏；代价是匹配不够精确。对精确性要求高的场景，可以删掉关键词行，仅保留同分类内已列出的显式域名。
 

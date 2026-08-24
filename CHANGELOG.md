@@ -1,5 +1,11 @@
 # Changelog
 
+## v2026.08.25.1GoogleAITK
+
+### Fixes
+
+- `tiktok_custom` 新增 `DOMAIN-KEYWORD,capcut`（45 → 46，总量 929）：修复上一版共性扫描确认的唯一真风险。CapCut 一族在库内已呈现三种兄弟域形态（`capcutapi.com`/`.us` 换尾、`capcutcdn-us.com` 区域中缀、`capcutstatic.com` 职能拆分），后缀匹配接不住未来新区域（如 `capcutcdn-eu.com`、`capcutapi-sg.com`）。采用品牌关键词与既有 `tiktok`/`douyin`/`adobe` 先例一致；矩阵验证现有域全部仍命中、假想新区域全部接住、无误伤。7 条显式后缀按惯例保留作文档与退路。`RULES.md` 关键词表已同步。
+
 ## v2026.08.24.7GoogleAITK
 
 ### Fixes

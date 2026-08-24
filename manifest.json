@@ -1,9 +1,9 @@
 {
   "schema": 1,
-  "rule_version": "v2026.08.24.7GoogleAITK",
-  "generated_on": "2026-08-24",
+  "rule_version": "v2026.08.25.1GoogleAITK",
+  "generated_on": "2026-08-25",
   "public_categories": 23,
-  "total_rules": 928,
+  "total_rules": 929,
   "privacy": {
     "contains_proxy_nodes": false,
     "contains_subscription_urls": false,
@@ -43,8 +43,8 @@
       "sha256": "c905946b771fd8435e30e37762e0f0ec8e32ca638f0dfd5362aa9e7e92dac605"
     },
     "tiktok_custom.yaml": {
-      "count": 45,
-      "sha256": "8dc05faa494b78e7a1e8c2c8f36dcdef4be6c4451a4f7f49a08cc6751b4c6682"
+      "count": 46,
+      "sha256": "af79c1f7eaceff5ca64368fe4cf696ef1b5a7c82fd5df6a89683e503c6741267"
     },
     "crypto_custom.yaml": {
       "count": 68,
