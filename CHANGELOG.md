@@ -45,8 +45,6 @@
 
 ## v2026.08.24.5GoogleAITK
 
-## v2026.08.24.5GoogleAITK
-
 ### Rules
 
 - `ai_custom` 补收 3 条（246，总量 929）：`ppl-ai-file-upload.s3.amazonaws.com` 与 `pplx-res.cloudinary.com`（Perplexity 的文件上传桶与静态资源——主站早已收录而上传链路缺失，属「同链路必须同出口」缺口）、`clawhub.ai`（OpenClaw 技能市场，`openclaw.ai`/`claw.cloud` 均已在库）。三条均 DoH 验活。
