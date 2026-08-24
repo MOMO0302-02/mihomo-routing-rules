@@ -1,5 +1,24 @@
 # Changelog
 
+## v2026.08.24.3GoogleAITK
+
+### Rules
+
+- 与**官方维护的 `geosite:category-ai-!cn`**（mihomo 内核自带地理数据库，MetaCubeX 维护）做双向比对，取「结合方案」：官方名单 179 条里本库一条都没覆盖的有 85 条，逐条甄别后收 **61 条**，`ai_custom` 181 → 242，总量 848 → 909。
+- 收录的主要是四类：
+  - **已收厂商的另一个域名**：`perplexity.com`、`cohere.ai`、`elevenlabs.com`、`kimi.ai`、`moonshot.ai`、`copilot.com`、`clau.de`、`hf.co`、`hf.space`、`poecdn.net`、`manuscdn.com`、`cursor-cdn.com`、`codeiumdata.com`、`windsurf.build`——多数是 301 到已收主域的第一跳，此前跳转起点无规则命中。
+  - **Google AI 的 `.com` 一侧**：`ai.studio`、`bard.google.com`、`jules.google.com`、`labs.google.com`、`notebook.google.com`、`opal.google.com`、`antigravity-unleash.goog`。本库此前只收了 `.google` gTLD 那一侧，是同一个失效模式的另一半。
+  - **新产品**：`kiro.dev`、`coderabbit.ai`、`deepwiki.com`/`.org`、`jetbrains.ai` 与 `grazie.ai`/`grazie.aws.intellij.net`、`comfy.org`/`comfyregistry.org`、`crewai.com`、`duck.ai`、`grokipedia.com`、`h2o.ai`、`jasper.ai`、`lovart.ai`、`mozilla.ai`、`novelai.net`、`openart.ai`、`sider.ai`、`tripo3d.ai`、`anythingllm.com`、`clipdrop.co`、`diabrowser.com`、`openspec.dev`、`agentclientprotocol.com`。
+  - **字节 Coze / Cici**：`coze.com`、`cici.com`、`ciciai.com`、`ciciaicdn.com`，以及 `dola.com`——实测 `cici.com` 与 `ciciai.com` 均已 301 至 `www.dola.com`，属品牌更名，新旧域一并收。
+  - 另补 OpenAI / Anthropic 的资源域：`oaistatsig.com`、`openaicom.imgix.net`、`openaiassets.blob.core.windows.net`、`openai.com.cdn.cloudflare.net`、`production-openaicom-storage.azureedge.net`、`openaicom-api-*.z01.azurefd.net`、`servd-anthropic-website.b-cdn.net`。
+- **官方名单里刻意不收的 24 条**：`envato.com` / `themeforest.net` / `envatousercontent.com`（素材交易市场，与 AI 无关）、`liveperson.net` / `lpsnmedia.net`（通用客服 SaaS，属本库既有的「通用第三方服务」谨慎范围）、`openai.qualtrics.com`（问卷）、`copilot-stg.com`（预发布环境）、`coderabbit.gallery.vsassets.io`（VS Code 市场 CDN，范围过宽），以及 `talkai.info`、`spicywriter.com`、`notegpt.io`、`oystermercury.top` 等镜像站与小众站。`comfyci.org` 剔除：无 NS 记录，域名已不存在。
+- 反向差异也记录在案：**本库有、官方名单没有的 118 条**，主要是 ChatGPT 登录链路依赖的通用 SaaS（缺了登录会卡住）、按「面向国际」判据收的国产 AI 国际站（`kimi.com`、`z.ai`、`qwen.ai`），以及一批厂商主域。两份名单定位不同——官方回答「是不是 AI 网站」，本库还要回答「该走哪个出口」，因此**互为补充而非替代**。
+- 一处官方与本库的**有意分歧**：官方把 `minimax.io` 归入 AI（走代理），本库放在 `ai_api_direct_custom`（直连），沿用既有决策不改。
+
+### Documentation
+
+- `RULES.md`「需要留意的范围」新增第 4 条：`github_custom` 里的 `DOMAIN-SUFFIX,blob.core.windows.net` 实际覆盖**整个 Azure 对象存储**，大量第三方网站用它托管文件。与既有第 3 条同类——不是匹配错误，但使用者无法从分类名预期该范围，已给出移除指引。
+
 ## v2026.08.24.2GoogleAITK
 
 ### Fixes

@@ -1,6 +1,6 @@
 # 规则索引
 
-当前公开版本：`v2026.08.24.2GoogleAITK`，共 22 个分类、848 条 classical 规则。
+当前公开版本：`v2026.08.24.3GoogleAITK`，共 22 个分类、909 条 classical 规则。
 
 配置中的策略名只是建议值，必须替换成你现有配置里真实存在的策略组。直连分类建议保持 `DIRECT`；其余分类可按自己的节点和地区需求映射。
 
@@ -13,7 +13,7 @@
 | Google Drive | `google_drive_custom` | 34 | `AI` | [Raw](https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/release/rules/google_drive_custom.yaml) | [CDN](https://cdn.jsdelivr.net/gh/MOMO0302-02/mihomo-routing-rules@release/rules/google_drive_custom.yaml) |
 | 指定 AI API 直连 | `ai_api_direct_custom` | 25 | `DIRECT` | [Raw](https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/release/rules/ai_api_direct_custom.yaml) | [CDN](https://cdn.jsdelivr.net/gh/MOMO0302-02/mihomo-routing-rules@release/rules/ai_api_direct_custom.yaml) |
 | AI API | `ai_api_custom` | 42 | `AI` | [Raw](https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/release/rules/ai_api_custom.yaml) | [CDN](https://cdn.jsdelivr.net/gh/MOMO0302-02/mihomo-routing-rules@release/rules/ai_api_custom.yaml) |
-| 综合 AI | `ai_custom` | 181 | `AI` | [Raw](https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/release/rules/ai_custom.yaml) | [CDN](https://cdn.jsdelivr.net/gh/MOMO0302-02/mihomo-routing-rules@release/rules/ai_custom.yaml) |
+| 综合 AI | `ai_custom` | 242 | `AI` | [Raw](https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/release/rules/ai_custom.yaml) | [CDN](https://cdn.jsdelivr.net/gh/MOMO0302-02/mihomo-routing-rules@release/rules/ai_custom.yaml) |
 | GitHub | `github_custom` | 15 | `GitHub` | [Raw](https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/release/rules/github_custom.yaml) | [CDN](https://cdn.jsdelivr.net/gh/MOMO0302-02/mihomo-routing-rules@release/rules/github_custom.yaml) |
 | TikTok / CapCut | `tiktok_custom` | 45 | `TikTok` | [Raw](https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/release/rules/tiktok_custom.yaml) | [CDN](https://cdn.jsdelivr.net/gh/MOMO0302-02/mihomo-routing-rules@release/rules/tiktok_custom.yaml) |
 | 加密货币 | `crypto_custom` | 68 | `Crypto` | [Raw](https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/release/rules/crypto_custom.yaml) | [CDN](https://cdn.jsdelivr.net/gh/MOMO0302-02/mihomo-routing-rules@release/rules/crypto_custom.yaml) |
@@ -82,3 +82,11 @@ Provider 名称保持 `tencent_docs_direct_custom` 不变——改名会让所�
 保留是因为缺了它们 ChatGPT 等产品的登录会卡住——这条链路上的验证码、功能开关和认证请求都必须与主站走同一出口。如果你只用 API 而不需要网页登录，可以删掉这 25 行。
 
 作为对照，`openai_login_custom` 对同类服务采用了精确写法（如 `DOMAIN,o207216.ingest.sentry.io`），只覆盖 OpenAI 实际使用的那几个主机。
+
+### 4. `github_custom` 含 `blob.core.windows.net`，范围是整个 Azure 对象存储
+
+`github_custom` 里有一条 `DOMAIN-SUFFIX,blob.core.windows.net`。它原本是为 GitHub 的部分产物下载而收，但 `*.blob.core.windows.net` 是 **Azure 对象存储的通用域名**，被大量第三方网站用来托管文件——启用本分类等于把这些站点的文件下载一并送进 GitHub 策略组。
+
+与第 3 条同类：不是匹配错误，但使用者无法从分类名预期这个范围。若你的 GitHub 用法不涉及需要该域名的产物下载，可以删掉这一行。
+
+注意 `ai_custom` 里的 `openaiassets.blob.core.windows.net` 是更精确的写法，且 `ai_custom` 在推荐顺序中排在 `github_custom` 之前，因此 OpenAI 的资源不受这条影响。
