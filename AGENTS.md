@@ -15,6 +15,7 @@
 
 ## 当前状态
 
+- 2026-08-25 判据（**「上游 geosite 已收录」不构成本库的删除理由**）：订阅工作台面板的「补丁体检」建议删 3 条上游已有的域名（github-cloud.s3.amazonaws.com、ssl.google-analytics.com、clients1.google.com），经核实拒绝。该逻辑推广开会删掉 github_custom 的 13/15、google_drive_custom 的 33/34——面板只报 3 条是因为它只核对了自己那片。本库与 geosite 回答不同问题（geosite 答「是谁的域名」，本库答「必须走哪个出口」），且本库承诺**独立完整**：不依赖使用者是否装 geosite、如何映射 geosite。与上游重叠是该承诺的必然代价。同理适用于未来一切「与官方名单去重」类建议。
 - 公开规则版本：`v2026.08.25.3GoogleAITK`（**23 类、932 条**）。规则写法优化审计：①补 Claude 进程双写规则（实测本机 claude.exe 在跑而库内无 Claude 进程兜底，ChatGPT/Codex 都有——进程规则可在新遥测域被发现前就兜住流量，是 Datadog 类漏网的前置免疫）；②22 条 DOMAIN 精确写法逐条复审，均属有意精确（登录链主机/单一 CDN 主机），无需放宽；③`withgoogle.com` 后缀偏宽（覆盖 Google 全部实验产品）备案观察，未动；④结构性优化（拆 behavior:domain + mrs 二进制格式，加载更快）属破坏性契约变更——会改 provider 数量与引用方式，判定为不做，除非未来性能成为实际问题。
 - 公开规则版本（上一版）：`v2026.08.25.2GoogleAITK`（23 类、930 条）。实时监控闭环打通：`watch_fallback.py` 支持 Clash Party 命名管道自动发现（`//./pipe/MihomoParty/mihomo-admin-*`，HTTP over pipe 无需密钥、无需用户改设置；TCP 控制器为空串是该客户端常态）。首跑 60 秒即抓到 `http-intake.logs.us5.datadoghq.com`（Datadog 日志族，与 browser-intake 浏览器族是两条链），补收 `datadoghq.com` 主域后缀（sentry.io 先例）。`gh-proxy.org` 出现在兜底但**刻意不收**——加速站的存在意义就是免代理直连。注意：用户当前 VPS 配置不引用本库规则集，监控报告的「已覆盖但走兜底」段属预期，不是故障。管道路径在 Python 里用正斜杠形态（`//./pipe/...`），bash heredoc 会吃反斜杠。
 - 公开规则版本（上一版）：`v2026.08.25.1GoogleAITK`（23 类、929 条）。2026-08-25 修复共性扫描确认的唯一真风险：`tiktok_custom` 加品牌关键词 `capcut`（与 tiktok/douyin/adobe 先例一致，覆盖 capcutapi/capcutcdn 两族的未来区域兄弟域，矩阵验证无误伤），显式后缀保留。**8-24 共性扫描的 11 条至此全部处置完毕**（1 修复、10 甄别为无需动作）。
