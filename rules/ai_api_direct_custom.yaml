@@ -1,6 +1,5 @@
 payload:
   - "DOMAIN-SUFFIX,apiyi.com"
-  - "DOMAIN-SUFFIX,api.deepseek.com"
   - "DOMAIN-SUFFIX,siliconflow.cn"
   - "DOMAIN-SUFFIX,bigmodel.cn"
   - "DOMAIN-SUFFIX,zhipuai.cn"

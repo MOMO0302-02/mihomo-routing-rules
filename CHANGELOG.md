@@ -1,5 +1,13 @@
 # Changelog
 
+## v2026.08.26.1GoogleAITK
+
+### Fixes
+
+- `ai_custom` 删除 `PROCESS-NAME,codex.exe` 与 `PROCESS-NAME,claude.exe` 两行（249 → 247）：**「大小写双写」的前提是错的**。mihomo 的进程名匹配走 `rules/common/process.go` 的 `strings.EqualFold(target, ps.pattern)`，**本就忽略大小写**（通配与正则分支同样带 `IgnoreCase`）。因此 `codex.exe` 相对 `Codex.exe` 永远不可能多匹配到任何东西，纯属死行。v2026.08.25.3 引入 Claude双写时所称的「沿用 Codex 双写先例」据此作废，`Codex.exe`/`Claude.exe` 单写即可覆盖全部大小写形态。
+- `ai_api_direct_custom` 删除 `DOMAIN-SUFFIX,api.deepseek.com`（25 → 24，总量 929）：该条与 `ai_custom` 的 `DOMAIN-SUFFIX,deepseek.com` 冲突且**永远不生效** —— 在订阅工作台的推荐顺序里 AI 组排在直连组之前，先匹配者赢。使用方确认最终意图就是**DeepSeek 走 AI 代理组**，故删除这条表达相反意图的死行。
+  ⚠️ 删除理由**不是**「上游 geosite 已收录」（该判据见 2026-08-25，仍然有效、未被动摇），而是**本库内部两条规则意图冲突、且已确认最终意图**。两者是不同的问题。
+
 ## v2026.08.25.3GoogleAITK
 
 ### Rules
