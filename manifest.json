@@ -2,8 +2,8 @@
   "schema": 1,
   "rule_version": "v2026.08.26.1GoogleAITK",
   "generated_on": "2026-08-26",
-  "public_categories": 23,
-  "total_rules": 929,
+  "public_categories": 24,
+  "total_rules": 932,
   "privacy": {
     "contains_proxy_nodes": false,
     "contains_subscription_urls": false,
@@ -101,6 +101,10 @@
     "ntp_direct_custom.yaml": {
       "count": 16,
       "sha256": "9012a927c0d2c49d708564b21bc403fd140087282d895af1da454d205e6653b8"
+    },
+    "uu_remote_direct_custom.yaml": {
+      "count": 3,
+      "sha256": "47ef501999f60ed34101645185571e9bbb05d978a98926ec411d5674df003c31"
     }
   }
 }

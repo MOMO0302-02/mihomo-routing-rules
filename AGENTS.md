@@ -15,6 +15,7 @@
 
 ## 当前状态
 
+- 2026-08-28 新增 `uu_remote_direct_custom`（3 条，UU远程/网易，内部代号 GameViewer）：**用 PROCESS-NAME 而非域名** —— 远程串流的数据面走 P2P 打洞/中转，直接连 IP、不做 DNS，域名规则一条也接不住；对端 IP 在境外时会落到兜底被塞进代理，远程操作立刻变卡。按进程名可连同信令与数据面一起兜住。只收真正联网的三个可执行文件（`GameViewer.exe` / `GameViewerServer.exe` / `GameViewerHealthd.exe`）；`Upgrade.exe` 这类通用名**不收**，重名风险太大。进程名按真实大小写只写一种（沿用 2026-08-26 判据）。
 - 2026-08-26 判据（**`PROCESS-NAME` 不区分大小写，禁止大小写双写**）：mihomo 的进程名匹配在 `rules/common/process.go` 里走 `strings.EqualFold(target, ps.pattern)`，通配与正则分支也带 `IgnoreCase`——**本就忽略大小写**。因此 `codex.exe` 相对 `Codex.exe`、`claude.exe` 相对 `Claude.exe` 永远不可能多匹配到任何东西，是纯死行，已删（249 → 247）。v2026.08.25.3 引入 Claude 双写时所称的「沿用 Codex 双写先例」**据此作废**：以后新增进程规则**只写一种大小写**（推荐按可执行文件的真实名字写，便于人读）。
 - 2026-08-26 删除 `ai_api_direct_custom` 的 `DOMAIN-SUFFIX,api.deepseek.com`（25 → 24，总量 929）：它与 `ai_custom` 的 `DOMAIN-SUFFIX,deepseek.com` 表达**相反意图**，且在订阅工作台的推荐顺序下（AI 组先于直连组）**永远不生效**。使用方已确认最终意图是 DeepSeek 走 AI 代理组。⚠️ **本次删除与 2026-08-25 的「geosite 已收录不构成删除理由」判据不冲突**：那条讲的是**与外部名单重叠**（本库承诺独立完整，重叠是代价）；本次是**库内两条规则互相打架**，属于矛盾消解，不是去重。两类判断今后不要混为一谈。
 - 2026-08-25 判据（**「上游 geosite 已收录」不构成本库的删除理由**）：订阅工作台面板的「补丁体检」建议删 3 条上游已有的域名（github-cloud.s3.amazonaws.com、ssl.google-analytics.com、clients1.google.com），经核实拒绝。该逻辑推广开会删掉 github_custom 的 13/15、google_drive_custom 的 33/34——面板只报 3 条是因为它只核对了自己那片。本库与 geosite 回答不同问题（geosite 答「是谁的域名」，本库答「必须走哪个出口」），且本库承诺**独立完整**：不依赖使用者是否装 geosite、如何映射 geosite。与上游重叠是该承诺的必然代价。同理适用于未来一切「与官方名单去重」类建议。

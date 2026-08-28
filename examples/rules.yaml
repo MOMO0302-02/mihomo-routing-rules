@@ -2,6 +2,7 @@ rules:
   - RULE-SET,ntp_direct_custom,DIRECT
   - RULE-SET,openai_login_custom,AI
   - RULE-SET,douyin_direct_custom,DIRECT
+  - RULE-SET,uu_remote_direct_custom,DIRECT
   - RULE-SET,tencent_docs_direct_custom,DIRECT
   - RULE-SET,youtube_custom,Streaming
   - RULE-SET,google_drive_custom,AI

@@ -22,6 +22,14 @@ douyin_direct_custom:
   path: ./ruleset/douyin_direct_custom.yaml
   interval: 86400
 
+uu_remote_direct_custom:
+  type: http
+  behavior: classical
+  format: yaml
+  url: https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/release/rules/uu_remote_direct_custom.yaml
+  path: ./ruleset/uu_remote_direct_custom.yaml
+  interval: 86400
+
 tencent_docs_direct_custom:
   type: http
   behavior: classical

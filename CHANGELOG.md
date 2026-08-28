@@ -1,4 +1,10 @@
 # Changelog
+## v2026.08.28.1GoogleAITK
+
+- 新增 `uu_remote_direct_custom`（3 条）：UU远程（网易，内部代号 GameViewer）一律直连。
+  用 `PROCESS-NAME` 而非域名 —— 串流数据面走 P2P 直连 IP、不做 DNS，域名规则接不住；
+  对端在境外时会被兜底规则塞进代理，远程操作变卡。
+- 分类 23 → 24，规则 929 → 932。
 
 ## v2026.08.26.1GoogleAITK
 

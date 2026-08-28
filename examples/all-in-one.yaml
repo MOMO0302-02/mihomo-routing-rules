@@ -25,6 +25,13 @@ rule-providers:
     path: ./ruleset/douyin_direct_custom.yaml
     interval: 86400
 
+  uu_remote_direct_custom:
+    type: http
+    behavior: classical
+    format: yaml
+    url: https://raw.githubusercontent.com/MOMO0302-02/mihomo-routing-rules/release/rules/uu_remote_direct_custom.yaml
+    path: ./ruleset/uu_remote_direct_custom.yaml
+    interval: 86400
   tencent_docs_direct_custom:
     type: http
     behavior: classical
@@ -189,6 +196,7 @@ rules:
   - RULE-SET,ntp_direct_custom,DIRECT
   - RULE-SET,openai_login_custom,AI
   - RULE-SET,douyin_direct_custom,DIRECT
+  - RULE-SET,uu_remote_direct_custom,DIRECT
   - RULE-SET,tencent_docs_direct_custom,DIRECT
   - RULE-SET,youtube_custom,Streaming
   - RULE-SET,google_drive_custom,AI

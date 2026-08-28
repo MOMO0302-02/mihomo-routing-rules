@@ -9,7 +9,7 @@
 
 本仓库提供的是**规则片段**，不是完整订阅。它不包含代理节点、DNS、端口或策略组，不能直接替代你的订阅配置。
 
-使用时需要把 `rule-providers` 和 `rules` 合并进现有 Mihomo 配置，或者放进 Clash Party、FlClash 等客户端的覆写/扩展配置中。23 个分类的用途、条目数和独立下载地址见 [`RULES.md`](RULES.md)。
+使用时需要把 `rule-providers` 和 `rules` 合并进现有 Mihomo 配置，或者放进 Clash Party、FlClash 等客户端的覆写/扩展配置中。24 个分类的用途、条目数和独立下载地址见 [`RULES.md`](RULES.md)。
 
 ## 稳定更新通道
 
@@ -71,7 +71,7 @@ mihomo -t -f config.yaml
 
 通过后重新加载配置。首次命中时，Mihomo 会自动下载对应规则文件。
 
-## 全量使用 23 个分类
+## 全量使用 24 个分类
 
 仓库提供三种组合文件：
 

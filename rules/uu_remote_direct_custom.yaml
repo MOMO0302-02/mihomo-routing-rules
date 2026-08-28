@@ -1,0 +1,4 @@
+payload:
+  - "PROCESS-NAME,GameViewer.exe"
+  - "PROCESS-NAME,GameViewerServer.exe"
+  - "PROCESS-NAME,GameViewerHealthd.exe"
