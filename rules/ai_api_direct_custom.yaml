@@ -3,6 +3,7 @@ payload:
   - "DOMAIN-SUFFIX,siliconflow.cn"
   - "DOMAIN-SUFFIX,bigmodel.cn"
   - "DOMAIN-SUFFIX,zhipuai.cn"
+  - "DOMAIN-SUFFIX,z.ai"
   - "DOMAIN-SUFFIX,dashscope.aliyuncs.com"
   - "DOMAIN-SUFFIX,volces.com"
   - "DOMAIN-SUFFIX,volcengineapi.com"

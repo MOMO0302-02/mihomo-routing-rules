@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "rule_version": "v2026.09.03.2TrimTelemetry",
+  "rule_version": "v2026.09.03.3ZhipuDirect",
   "generated_on": "2026-09-03",
   "public_categories": 24,
   "total_rules": 924,
@@ -27,16 +27,16 @@
       "sha256": "b2d52a5372c4abdad049358a0b08289deef8ec17534fefc0414cda73ea436275"
     },
     "ai_api_direct_custom.yaml": {
-      "count": 30,
-      "sha256": "67dbbe6484a3f5edbb4ab08eaba2838befeb5b35a7ef092e942d50bc84658501"
+      "count": 31,
+      "sha256": "1b91830c38cbf8dbcb8f2984225962cca86076c22eec8379fe239393036548b4"
     },
     "ai_api_custom.yaml": {
       "count": 42,
       "sha256": "38a6be0c6d5607aa98b59d6ae67615efb83bba8f764bdee0f721162a21246123"
     },
     "ai_custom.yaml": {
-      "count": 233,
-      "sha256": "b4add660db8122141b906419f4265bf092a2b0bd07798e81d3f65cc22f5e4d04"
+      "count": 232,
+      "sha256": "7c2c9121d3076f0b131171110e64aecdc7b0d1a0d4562ff473a0e4c97b73c50d"
     },
     "github_custom.yaml": {
       "count": 15,
