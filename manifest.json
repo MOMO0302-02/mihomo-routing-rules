@@ -1,9 +1,9 @@
 {
   "schema": 1,
-  "rule_version": "v2026.08.26.1GoogleAITK",
-  "generated_on": "2026-08-26",
+  "rule_version": "v2026.09.02.1CNAIDirect",
+  "generated_on": "2026-09-02",
   "public_categories": 24,
-  "total_rules": 932,
+  "total_rules": 933,
   "privacy": {
     "contains_proxy_nodes": false,
     "contains_subscription_urls": false,
@@ -27,16 +27,16 @@
       "sha256": "b2d52a5372c4abdad049358a0b08289deef8ec17534fefc0414cda73ea436275"
     },
     "ai_api_direct_custom.yaml": {
-      "count": 24,
-      "sha256": "402434fb1c9ec7fab915aa43a1bdc40ee0a1a6e1b50ec2368c3fc672b1e405c2"
+      "count": 30,
+      "sha256": "67dbbe6484a3f5edbb4ab08eaba2838befeb5b35a7ef092e942d50bc84658501"
     },
     "ai_api_custom.yaml": {
       "count": 42,
       "sha256": "38a6be0c6d5607aa98b59d6ae67615efb83bba8f764bdee0f721162a21246123"
     },
     "ai_custom.yaml": {
-      "count": 247,
-      "sha256": "d25a471a15b323df640ef77c215db651e49bffb94d4ea9a3d3bafa2816614e41"
+      "count": 242,
+      "sha256": "03db4fab4be2775d41c51cf8707b42fa5d23e2a375241f2375a3e7a6d406a5a6"
     },
     "github_custom.yaml": {
       "count": 15,

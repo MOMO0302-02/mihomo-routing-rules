@@ -91,3 +91,15 @@ bd ready
 - `human/blocked`：需要用户选择或人工验收。
 - `external-authorization/blocked`：公开发布、打 tag、推送或外部状态变更。
 - `backlog/deferred`：以后再评估。
+
+- 2026-09-02 **国内 AI 网页版改直连**（932 → 933，`ai_custom` 247→242、`ai_api_direct_custom` 24→30）。
+  起因是使用者实测：智谱等国内 AI 站推荐「用谷歌登录」而不是手机号 —— 根因是这些站的
+  **网页域名**此前在 `ai_custom`（走海外出口），站点按海外用户对待。搬家 5 条
+  （`deepseek.com`/`kimi.com`/`kimi.ai`/`moonshot.ai`/`qwen.ai`）+ 新增 `chatglm.cn`
+  （智谱清言网页版，此前**全库无覆盖**，一路落到兜底）。全部 DoH 验活并带对照组。
+  📌 甄别要点：关键词匹配会误伤 —— 初筛用 `spark` 找讯飞星火时把 **`genspark.ai`**
+  （境外 AI）也捞了出来，靠逐条看才没搬错。**批量搬家前必须逐条确认品牌归属。**
+  📌 命名债：`ai_api_direct_custom` 现在同时含 API 与网页域名，而 id 是公开 URL 的一部分，
+  改名会打断所有使用者 —— 只在 `RULES.md` 改显示名为「国内 AI 直连（API 与网页版）」，id 不动。
+  ⚠️ 这是**取舍**不是纯改进：这几个是各家「国际站」域名，改直连后不再经海外出口；
+  要国际版体验的使用者需自行移回 `ai_custom`。CHANGELOG 已写明。

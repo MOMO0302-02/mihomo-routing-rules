@@ -1,4 +1,19 @@
 # Changelog
+## v2026.09.02.1CNAIDirect
+
+- **国内 AI 的网页版改直连**（`ai_custom` 242、`ai_api_direct_custom` 30，总量 932 → 933）。
+  起因是使用者实测：智谱等国内 AI 站点推荐用谷歌登录、而不是手机号登录。
+  根因是这些站的**网页域名**此前落在 `ai_custom`（走海外出口），站点按海外用户对待。
+  搬家 5 条：`deepseek.com`、`kimi.com`、`kimi.ai`、`moonshot.ai`、`qwen.ai`；
+  新增 1 条：`chatglm.cn`（智谱清言网页版，此前全库无覆盖，落到兜底）。
+  全部经 DoH 验活并带对照组（baidu.com 存在、构造假域名 Status=3）。
+- ⚠️ **取舍说明**：这几个是各家的「国际站」域名，改直连后就不再经海外出口。
+  若你要的是国际版体验（避开国内限流、用国际版功能），请把它们移回 `ai_custom`。
+  本库的判据是「该走哪个出口」，而**多数使用者要的是国内身份**。
+- 📌 命名债：`ai_api_direct_custom` 现在同时含 API 与网页域名，名字只说了 API。
+  分类 id 是公开 URL 的一部分，改名会打断所有使用者，故只在 `RULES.md` 里把显示名
+  改成「国内 AI 直连（API 与网页版）」，id 保持不变。
+
 ## v2026.08.28.1GoogleAITK
 
 - 新增 `uu_remote_direct_custom`（3 条）：UU远程（网易，内部代号 GameViewer）一律直连。
