@@ -1,4 +1,22 @@
 # Changelog
+## v2026.09.03.1TrimSaaS
+
+- **精简：删掉 6 条与 ChatGPT 登录链无关的通用第三方域名**（`ai_custom` 242 → 236，
+  总量 933 → 927）：`segment.io`、`segment.com`、`segmentapis.com`、`intercom.com`、
+  `intercomassets.com`、`launchdarkly.com`。
+  这些不是 AI 网站，而是**成千上万个站点共用的**行为分析、在线客服、功能开关服务。
+  留着它们的后果是：使用者访问**任何**网站时，那部分流量都会被本库的 AI 策略牵走
+  （对把 AI 组钉死在固定出口的人尤其明显）。删掉后它们回落到使用者自己的兜底策略。
+- **刻意保留、并写明理由**（防止下一轮"顺手一起删"）：
+  - `intercom.io` —— ChatGPT 应用内客服组件在用，不在登录链但在使用链上；
+  - `intercomcdn.com` —— `openai_login_custom` 有精确对应 `js.intercomcdn.com`，留待第二步；
+  - `oaistatsig.com` —— OpenAI 自家域名（`oai` 前缀），不属于通用 SaaS。
+- 📌 **这是分两步走的第一步**。`ai_custom` 里还有 17 条通用后缀
+  （`sentry.io`/`datadoghq.com`/`statsig.com`/`auth0.com`/`challenges.cloudflare.com` 等）
+  在 `openai_login_custom` 里都有**精确到主机名**的对应，理论上也可删。
+  但精确条目是当时抓包得来的，OpenAI 换端点时宽后缀能兜住、精确规则会漏，
+  且故障表现是「登录卡住而不报错」——**先跑一段时间确认无异常再议**。
+
 ## v2026.09.02.1CNAIDirect
 
 - **国内 AI 的网页版改直连**（`ai_custom` 242、`ai_api_direct_custom` 30，总量 932 → 933）。

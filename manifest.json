@@ -1,9 +1,9 @@
 {
   "schema": 1,
-  "rule_version": "v2026.09.02.1CNAIDirect",
-  "generated_on": "2026-09-02",
+  "rule_version": "v2026.09.03.1TrimSaaS",
+  "generated_on": "2026-09-03",
   "public_categories": 24,
-  "total_rules": 933,
+  "total_rules": 927,
   "privacy": {
     "contains_proxy_nodes": false,
     "contains_subscription_urls": false,
@@ -35,8 +35,8 @@
       "sha256": "38a6be0c6d5607aa98b59d6ae67615efb83bba8f764bdee0f721162a21246123"
     },
     "ai_custom.yaml": {
-      "count": 242,
-      "sha256": "03db4fab4be2775d41c51cf8707b42fa5d23e2a375241f2375a3e7a6d406a5a6"
+      "count": 236,
+      "sha256": "964f45b1583e631b05391878780818ec152eed09e20e952698aa7f4497d5e1b8"
     },
     "github_custom.yaml": {
       "count": 15,
