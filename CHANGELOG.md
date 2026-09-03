@@ -1,4 +1,22 @@
 # Changelog
+## v2026.09.03.2TrimTelemetry
+
+- **精简第二步：删 3 条宽后缀遥测域名**（`ai_custom` 236 → 233，总量 927 → 924）：
+  `sentry.io`、`datadoghq.com`、`intercomcdn.com`。
+  这三条在 `openai_login_custom` 里都有**精确到主机名**的对应
+  （`o207216.ingest.sentry.io` / `o33249.ingest.sentry.io` /
+  `rum.browser-intake-datadoghq.com` / `js.intercomcdn.com`），删除前已逐条核对仍在。
+  效果：其它网站的错误上报与遥测不再被 AI 策略牵走，OpenAI 自己那几个端点照旧命中。
+- 📌 **为什么只删这 3 条、而不是原计划的 17 条**：重新分析发现那 17 条不是同一类东西。
+  其中 **12 条在 `ai_custom` 与 `openai_login_custom` 里一模一样**
+  （`auth0.com`/`workos.com`/`arkoselabs.com`/`challenges.cloudflare.com`/`statsig.*` 等）——
+  从 `ai_custom` 删掉它们对同时启用两套的人**毫无变化**，却会坑到只用 `ai_custom` 的人，
+  与本库「独立完整」的承诺相悖，**故保留**。真正宽窄有别的只有这 3 条。
+- ⚠️ 顺带更正一条早先的风险判断：曾把这批笼统描述为「删了可能导致 ChatGPT 登录卡住」。
+  **不成立** —— 认证链域名（auth0 / arkoselabs / funcaptcha / challenges.cloudflare）
+  全部属于那 12 条「一模一样」的，本来就不在删除范围；本次删的 3 条纯属遥测与客服资源，
+  最坏结果只是「某条遥测走了另一个出口」，不影响功能。
+
 ## v2026.09.03.1TrimSaaS
 
 - **精简：删掉 6 条与 ChatGPT 登录链无关的通用第三方域名**（`ai_custom` 242 → 236，
