@@ -1,9 +1,9 @@
 {
   "schema": 1,
-  "rule_version": "v2026.09.03.3ZhipuDirect",
-  "generated_on": "2026-09-03",
+  "rule_version": "v2026.09.05.1TrimKeywordDup",
+  "generated_on": "2026-09-05",
   "public_categories": 24,
-  "total_rules": 924,
+  "total_rules": 876,
   "privacy": {
     "contains_proxy_nodes": false,
     "contains_subscription_urls": false,
@@ -15,8 +15,8 @@
       "sha256": "7a91d1db442975ef271697bc169ded185c820320cfd56d3d772df3f778e28e68"
     },
     "douyin_direct_custom.yaml": {
-      "count": 33,
-      "sha256": "4fe565b5a066454d186951a570973d815b8ddaf0670c72cd7137d12796b83ce5"
+      "count": 24,
+      "sha256": "1c3e0d75d347b8a9f36151163a8d2de5816a7c9f693d8dd25a1f6cb5b3eead21"
     },
     "tencent_docs_direct_custom.yaml": {
       "count": 12,
@@ -43,12 +43,12 @@
       "sha256": "c905946b771fd8435e30e37762e0f0ec8e32ca638f0dfd5362aa9e7e92dac605"
     },
     "tiktok_custom.yaml": {
-      "count": 46,
-      "sha256": "af79c1f7eaceff5ca64368fe4cf696ef1b5a7c82fd5df6a89683e503c6741267"
+      "count": 27,
+      "sha256": "c221c7e1be2f5403b3e50eb0274af730fa7dadbb86199d32bf424d32534d6b44"
     },
     "crypto_custom.yaml": {
-      "count": 68,
-      "sha256": "0a6da0ae4a7122ed510c43116108c536018c77531a8c8d51a9eb91c0f7527c90"
+      "count": 65,
+      "sha256": "6e114d6eb4494f8ded13dcf68c633bf0181cdcb881e53aae6dd603b84543cf5c"
     },
     "payment_custom.yaml": {
       "count": 26,
@@ -79,8 +79,8 @@
       "sha256": "3c4833cee0611d3621b9d6164a00207ff03ea8169f93e838f3a20c567206d86b"
     },
     "adobe_custom.yaml": {
-      "count": 55,
-      "sha256": "c52c568d9035b0dd25b33020299df9a7fa833d6852bbce8e3ac1bd4a7497e389"
+      "count": 38,
+      "sha256": "1b780fdfc5a41d734038c6ba731b8d49e91ca2e7741e67be0e152ea919f34a44"
     },
     "mobile_cn_custom.yaml": {
       "count": 99,
