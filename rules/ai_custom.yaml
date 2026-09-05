@@ -193,7 +193,6 @@ payload:
   - "DOMAIN-SUFFIX,deepwiki.org"
   - "DOMAIN-SUFFIX,coderabbit.ai"
   - "DOMAIN-SUFFIX,comfy.org"
-  - "DOMAIN-SUFFIX,comfyregistry.org"
   - "DOMAIN-SUFFIX,crewai.com"
   - "DOMAIN-SUFFIX,cursor-cdn.com"
   - "DOMAIN-SUFFIX,codeiumdata.com"
